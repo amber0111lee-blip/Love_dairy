@@ -208,12 +208,20 @@
 
         .image-preview {
             margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .image-preview-item {
             position: relative;
             display: inline-block;
         }
 
-        .image-preview img {
-            max-width: 200px;
+        .image-preview-item img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
             border-radius: 10px;
             border: 3px solid #ffe0f0;
         }
@@ -231,6 +239,39 @@
             cursor: pointer;
             font-size: 18px;
             line-height: 1;
+        }
+
+        .post-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .post-images.single {
+            grid-template-columns: 1fr;
+        }
+
+        .post-images.double {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #ffe0f0;
+            cursor: pointer;
+        }
+
+        .post-images.single .post-image {
+            height: auto;
+            max-height: 400px;
+        }
+
+        .post-images.double .post-image {
+            height: 200px;
         }
 
         .post-btn {
@@ -407,12 +448,20 @@
 
         .comment-image-preview {
             margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .comment-image-preview-item {
             position: relative;
             display: inline-block;
         }
 
-        .comment-image-preview img {
-            max-width: 150px;
+        .comment-image-preview-item img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
             border-radius: 8px;
             border: 2px solid #ffe0f0;
         }
@@ -432,11 +481,68 @@
             line-height: 1;
         }
 
-        .comment-image {
-            max-width: 100%;
-            border-radius: 8px;
+        .comment-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
             margin-top: 8px;
+        }
+
+        .comment-images.single {
+            grid-template-columns: 1fr;
+        }
+
+        .comment-images.double {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .comment-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
             border: 2px solid #ffe0f0;
+            cursor: pointer;
+        }
+
+        .comment-images.single .comment-image {
+            height: auto;
+            max-height: 200px;
+        }
+
+        /* 图片查看器 */
+        .image-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .image-viewer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
         }
 
         .comment-actions-bar {
@@ -561,14 +667,11 @@
         <!-- 发布框 -->
         <div class="post-box">
             <textarea id="postContent" placeholder="写下你想说的话..."></textarea>
-            <div id="imagePreview" class="image-preview" style="display: none;">
-                <img id="previewImg" src="" alt="预览">
-                <button class="remove-image" onclick="removeImage()">×</button>
-            </div>
+            <div id="imagePreview" class="image-preview"></div>
             <div class="post-actions">
                 <input type="datetime-local" id="postDate" class="date-input">
                 <label for="imageInput" class="file-input-label">📷 添加照片</label>
-                <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
+                <input type="file" id="imageInput" accept="image/*" multiple onchange="previewImage(event)">
                 <button class="post-btn" onclick="createPost()">发布</button>
             </div>
         </div>
@@ -584,12 +687,18 @@
         </div>
     </div>
 
+    <!-- 图片查看器 -->
+    <div class="image-viewer" id="imageViewer" onclick="closeImageViewer()">
+        <button class="image-viewer-close" onclick="closeImageViewer()">×</button>
+        <img id="viewerImage" src="" alt="查看图片">
+    </div>
+
     <script>
         // 数据存储
         let users = JSON.parse(localStorage.getItem('loveDiaryUsers')) || {};
         let posts = JSON.parse(localStorage.getItem('loveDiaryPosts')) || [];
         let currentUser = localStorage.getItem('loveDiaryCurrentUser');
-        let selectedImage = null;
+        let selectedImages = []; // 改为数组存储多张图片
         let commentImages = {}; // 存储各个评论框的图片
 
         // 初始化
@@ -648,25 +757,46 @@
             renderPosts();
         }
 
-        // 图片预览
+        // 图片预览（支持多图）
         function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
+            const files = event.target.files;
+            if (files.length === 0) return;
+
+            Array.from(files).forEach(file => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    selectedImage = e.target.result;
-                    document.getElementById('previewImg').src = selectedImage;
-                    document.getElementById('imagePreview').style.display = 'inline-block';
+                    selectedImages.push(e.target.result);
+                    renderImagePreview();
                 };
                 reader.readAsDataURL(file);
-            }
+            });
         }
 
-        // 移除图片
-        function removeImage() {
-            selectedImage = null;
-            document.getElementById('imageInput').value = '';
-            document.getElementById('imagePreview').style.display = 'none';
+        // 渲染图片预览
+        function renderImagePreview() {
+            const container = document.getElementById('imagePreview');
+            if (selectedImages.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = selectedImages.map((img, index) => `
+                <div class="image-preview-item">
+                    <img src="${img}" alt="预览${index + 1}">
+                    <button class="remove-image" onclick="removeImage(${index})">×</button>
+                </div>
+            `).join('');
+        }
+
+        // 移除单张图片
+        function removeImage(index) {
+            selectedImages.splice(index, 1);
+            renderImagePreview();
+            
+            // 如果所有图片都被删除，清空文件选择
+            if (selectedImages.length === 0) {
+                document.getElementById('imageInput').value = '';
+            }
         }
 
         // 发布动态
@@ -674,7 +804,7 @@
             const content = document.getElementById('postContent').value.trim();
             const postDate = document.getElementById('postDate').value;
 
-            if (!content && !selectedImage) {
+            if (!content && selectedImages.length === 0) {
                 alert('请输入内容或选择图片');
                 return;
             }
@@ -683,7 +813,7 @@
                 id: Date.now(),
                 author: currentUser,
                 content: content,
-                image: selectedImage,
+                images: [...selectedImages], // 存储多张图片
                 date: postDate ? new Date(postDate).getTime() : Date.now(),
                 comments: []
             };
@@ -692,7 +822,9 @@
             localStorage.setItem('loveDiaryPosts', JSON.stringify(posts));
 
             document.getElementById('postContent').value = '';
-            removeImage();
+            selectedImages = [];
+            renderImagePreview();
+            document.getElementById('imageInput').value = '';
             
             // 重置时间为当前
             const now = new Date();
@@ -721,73 +853,90 @@
             // 按用户设置的事件时间排序（从新到旧）
             const sortedPosts = [...posts].sort((a, b) => b.date - a.date);
 
-            container.innerHTML = sortedPosts.map(post => `
-                <div class="post-item">
-                    <div class="post-header">
-                        <span class="post-author">${post.author}</span>
-                        <div>
-                            <span class="post-date">${formatDate(post.date)}</span>
-                            ${post.author === currentUser ? `
-                                <button class="delete-post-btn" onclick="deletePost(${post.id})">删除</button>
-                            ` : ''}
+            container.innerHTML = sortedPosts.map(post => {
+                // 处理旧数据兼容性：将单个image转换为images数组
+                const images = post.images || (post.image ? [post.image] : []);
+                const imageClass = images.length === 1 ? 'single' : images.length === 2 ? 'double' : '';
+                
+                return `
+                    <div class="post-item">
+                        <div class="post-header">
+                            <span class="post-author">${post.author}</span>
+                            <div>
+                                <span class="post-date">${formatDate(post.date)}</span>
+                                ${post.author === currentUser ? `
+                                    <button class="delete-post-btn" onclick="deletePost(${post.id})">删除</button>
+                                ` : ''}
+                            </div>
                         </div>
-                    </div>
-                    ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
-                    ${post.image ? `<img src="${post.image}" alt="图片" class="post-image">` : ''}
-                    <div class="post-actions-bar">
-                        <button class="action-btn" onclick="toggleCommentInput(${post.id})">
-                            💬 评论 (${post.comments.length})
-                        </button>
-                    </div>
-                    <div id="commentInput-${post.id}" class="comment-input-area">
-                        <textarea class="comment-input" id="commentText-${post.id}" placeholder="写下你的评论..."></textarea>
-                        <div id="commentImagePreview-${post.id}" class="comment-image-preview" style="display: none;">
-                            <img id="commentPreviewImg-${post.id}" src="" alt="预览">
-                            <button class="remove-comment-image" onclick="removeCommentImage(${post.id})">×</button>
+                        ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
+                        ${images.length > 0 ? `
+                            <div class="post-images ${imageClass}">
+                                ${images.map(img => `
+                                    <img src="${img}" alt="图片" class="post-image" onclick="viewImage('${img}')">
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="post-actions-bar">
+                            <button class="action-btn" onclick="toggleCommentInput(${post.id})">
+                                💬 评论 (${post.comments.length})
+                            </button>
                         </div>
-                        <div class="comment-actions-bar">
-                            <label for="commentImageInput-${post.id}" class="comment-image-label">📷</label>
-                            <input type="file" id="commentImageInput-${post.id}" accept="image/*" onchange="previewCommentImage(event, ${post.id})" style="display: none;">
-                            <button class="comment-submit-btn" onclick="addComment(${post.id})">发送</button>
-                            <button class="cancel-comment-btn" onclick="toggleCommentInput(${post.id})">取消</button>
+                        <div id="commentInput-${post.id}" class="comment-input-area">
+                            <textarea class="comment-input" id="commentText-${post.id}" placeholder="写下你的评论..."></textarea>
+                            <div id="commentImagePreview-${post.id}" class="comment-image-preview"></div>
+                            <div class="comment-actions-bar">
+                                <label for="commentImageInput-${post.id}" class="comment-image-label">📷</label>
+                                <input type="file" id="commentImageInput-${post.id}" accept="image/*" multiple onchange="previewCommentImage(event, ${post.id})" style="display: none;">
+                                <button class="comment-submit-btn" onclick="addComment(${post.id})">发送</button>
+                                <button class="cancel-comment-btn" onclick="toggleCommentInput(${post.id})">取消</button>
+                            </div>
                         </div>
-                    </div>
-                    ${post.comments.length > 0 ? `
-                        <div class="comments-section">
-                            ${post.comments.map((comment, index) => `
-                                <div class="comment-item">
-                                    <div class="comment-header">
-                                        <span class="comment-author">${comment.author}</span>
-                                        <span class="comment-date">${formatDate(comment.date)}</span>
-                                    </div>
-                                    ${comment.replyTo ? `<div class="reply-info">回复 @${comment.replyTo}</div>` : ''}
-                                    ${comment.content ? `<div class="comment-content">${comment.content}</div>` : ''}
-                                    ${comment.image ? `<img src="${comment.image}" alt="图片" class="comment-image">` : ''}
-                                    <div class="comment-actions">
-                                        <button class="reply-btn" onclick="toggleReplyInput(${post.id}, ${index}, '${comment.author}')">回复</button>
-                                        ${comment.author === currentUser ? `
-                                            <button class="delete-comment-btn" onclick="deleteComment(${post.id}, ${index})">删除</button>
-                                        ` : ''}
-                                    </div>
-                                    <div id="replyInput-${post.id}-${index}" class="comment-input-area">
-                                        <textarea class="comment-input" id="replyText-${post.id}-${index}" placeholder="回复 ${comment.author}..."></textarea>
-                                        <div id="replyImagePreview-${post.id}-${index}" class="comment-image-preview" style="display: none;">
-                                            <img id="replyPreviewImg-${post.id}-${index}" src="" alt="预览">
-                                            <button class="remove-comment-image" onclick="removeReplyImage(${post.id}, ${index})">×</button>
+                        ${post.comments.length > 0 ? `
+                            <div class="comments-section">
+                                ${post.comments.map((comment, index) => {
+                                    const commentImages = comment.images || (comment.image ? [comment.image] : []);
+                                    const commentImageClass = commentImages.length === 1 ? 'single' : commentImages.length === 2 ? 'double' : '';
+                                    
+                                    return `
+                                        <div class="comment-item">
+                                            <div class="comment-header">
+                                                <span class="comment-author">${comment.author}</span>
+                                                <span class="comment-date">${formatDate(comment.date)}</span>
+                                            </div>
+                                            ${comment.replyTo ? `<div class="reply-info">回复 @${comment.replyTo}</div>` : ''}
+                                            ${comment.content ? `<div class="comment-content">${comment.content}</div>` : ''}
+                                            ${commentImages.length > 0 ? `
+                                                <div class="comment-images ${commentImageClass}">
+                                                    ${commentImages.map(img => `
+                                                        <img src="${img}" alt="图片" class="comment-image" onclick="viewImage('${img}')">
+                                                    `).join('')}
+                                                </div>
+                                            ` : ''}
+                                            <div class="comment-actions">
+                                                <button class="reply-btn" onclick="toggleReplyInput(${post.id}, ${index}, '${comment.author}')">回复</button>
+                                                ${comment.author === currentUser ? `
+                                                    <button class="delete-comment-btn" onclick="deleteComment(${post.id}, ${index})">删除</button>
+                                                ` : ''}
+                                            </div>
+                                            <div id="replyInput-${post.id}-${index}" class="comment-input-area">
+                                                <textarea class="comment-input" id="replyText-${post.id}-${index}" placeholder="回复 ${comment.author}..."></textarea>
+                                                <div id="replyImagePreview-${post.id}-${index}" class="comment-image-preview"></div>
+                                                <div class="comment-actions-bar">
+                                                    <label for="replyImageInput-${post.id}-${index}" class="comment-image-label">📷</label>
+                                                    <input type="file" id="replyImageInput-${post.id}-${index}" accept="image/*" multiple onchange="previewReplyImage(event, ${post.id}, ${index})" style="display: none;">
+                                                    <button class="comment-submit-btn" onclick="addReply(${post.id}, ${index}, '${comment.author}')">发送</button>
+                                                    <button class="cancel-comment-btn" onclick="toggleReplyInput(${post.id}, ${index})">取消</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="comment-actions-bar">
-                                            <label for="replyImageInput-${post.id}-${index}" class="comment-image-label">📷</label>
-                                            <input type="file" id="replyImageInput-${post.id}-${index}" accept="image/*" onchange="previewReplyImage(event, ${post.id}, ${index})" style="display: none;">
-                                            <button class="comment-submit-btn" onclick="addReply(${post.id}, ${index}, '${comment.author}')">发送</button>
-                                            <button class="cancel-comment-btn" onclick="toggleReplyInput(${post.id}, ${index})">取消</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    ` : ''}
-                </div>
-            `).join('');
+                                    `;
+                                }).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
         }
 
         // 删除动态
@@ -799,46 +948,105 @@
             }
         }
 
-        // 评论图片预览
+        // 评论图片预览（支持多图）
         function previewCommentImage(event, postId) {
-            const file = event.target.files[0];
-            if (file) {
+            const files = event.target.files;
+            if (files.length === 0) return;
+
+            if (!commentImages[`comment-${postId}`]) {
+                commentImages[`comment-${postId}`] = [];
+            }
+
+            Array.from(files).forEach(file => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    commentImages[`comment-${postId}`] = e.target.result;
-                    document.getElementById(`commentPreviewImg-${postId}`).src = e.target.result;
-                    document.getElementById(`commentImagePreview-${postId}`).style.display = 'inline-block';
+                    commentImages[`comment-${postId}`].push(e.target.result);
+                    renderCommentImagePreview(postId);
                 };
                 reader.readAsDataURL(file);
+            });
+        }
+
+        // 渲染评论图片预览
+        function renderCommentImagePreview(postId) {
+            const container = document.getElementById(`commentImagePreview-${postId}`);
+            const images = commentImages[`comment-${postId}`] || [];
+            
+            if (images.length === 0) {
+                container.innerHTML = '';
+                return;
             }
+
+            container.innerHTML = images.map((img, index) => `
+                <div class="comment-image-preview-item">
+                    <img src="${img}" alt="预览${index + 1}">
+                    <button class="remove-comment-image" onclick="removeCommentImage(${postId}, ${index})">×</button>
+                </div>
+            `).join('');
         }
 
         // 移除评论图片
-        function removeCommentImage(postId) {
-            delete commentImages[`comment-${postId}`];
-            document.getElementById(`commentImageInput-${postId}`).value = '';
-            document.getElementById(`commentImagePreview-${postId}`).style.display = 'none';
-        }
-
-        // 回复图片预览
-        function previewReplyImage(event, postId, commentIndex) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    commentImages[`reply-${postId}-${commentIndex}`] = e.target.result;
-                    document.getElementById(`replyPreviewImg-${postId}-${commentIndex}`).src = e.target.result;
-                    document.getElementById(`replyImagePreview-${postId}-${commentIndex}`).style.display = 'inline-block';
-                };
-                reader.readAsDataURL(file);
+        function removeCommentImage(postId, index) {
+            if (commentImages[`comment-${postId}`]) {
+                commentImages[`comment-${postId}`].splice(index, 1);
+                if (commentImages[`comment-${postId}`].length === 0) {
+                    delete commentImages[`comment-${postId}`];
+                    document.getElementById(`commentImageInput-${postId}`).value = '';
+                }
+                renderCommentImagePreview(postId);
             }
         }
 
+        // 回复图片预览（支持多图）
+        function previewReplyImage(event, postId, commentIndex) {
+            const files = event.target.files;
+            if (files.length === 0) return;
+
+            const key = `reply-${postId}-${commentIndex}`;
+            if (!commentImages[key]) {
+                commentImages[key] = [];
+            }
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    commentImages[key].push(e.target.result);
+                    renderReplyImagePreview(postId, commentIndex);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // 渲染回复图片预览
+        function renderReplyImagePreview(postId, commentIndex) {
+            const container = document.getElementById(`replyImagePreview-${postId}-${commentIndex}`);
+            const key = `reply-${postId}-${commentIndex}`;
+            const images = commentImages[key] || [];
+            
+            if (images.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = images.map((img, index) => `
+                <div class="comment-image-preview-item">
+                    <img src="${img}" alt="预览${index + 1}">
+                    <button class="remove-comment-image" onclick="removeReplyImage(${postId}, ${commentIndex}, ${index})">×</button>
+                </div>
+            `).join('');
+        }
+
         // 移除回复图片
-        function removeReplyImage(postId, commentIndex) {
-            delete commentImages[`reply-${postId}-${commentIndex}`];
-            document.getElementById(`replyImageInput-${postId}-${commentIndex}`).value = '';
-            document.getElementById(`replyImagePreview-${postId}-${commentIndex}`).style.display = 'none';
+        function removeReplyImage(postId, commentIndex, imageIndex) {
+            const key = `reply-${postId}-${commentIndex}`;
+            if (commentImages[key]) {
+                commentImages[key].splice(imageIndex, 1);
+                if (commentImages[key].length === 0) {
+                    delete commentImages[key];
+                    document.getElementById(`replyImageInput-${postId}-${commentIndex}`).value = '';
+                }
+                renderReplyImagePreview(postId, commentIndex);
+            }
         }
 
         // 切换评论输入框
@@ -847,7 +1055,9 @@
             if (inputArea.style.display === 'block') {
                 inputArea.style.display = 'none';
                 // 清理图片
-                removeCommentImage(postId);
+                delete commentImages[`comment-${postId}`];
+                renderCommentImagePreview(postId);
+                document.getElementById(`commentImageInput-${postId}`).value = '';
             } else {
                 inputArea.style.display = 'block';
                 document.getElementById(`commentText-${postId}`).focus();
@@ -860,7 +1070,9 @@
             if (inputArea.style.display === 'block') {
                 inputArea.style.display = 'none';
                 // 清理图片
-                removeReplyImage(postId, commentIndex);
+                delete commentImages[`reply-${postId}-${commentIndex}`];
+                renderReplyImagePreview(postId, commentIndex);
+                document.getElementById(`replyImageInput-${postId}-${commentIndex}`).value = '';
             } else {
                 inputArea.style.display = 'block';
                 document.getElementById(`replyText-${postId}-${commentIndex}`).focus();
@@ -870,9 +1082,9 @@
         // 添加评论
         function addComment(postId) {
             const content = document.getElementById(`commentText-${postId}`).value.trim();
-            const image = commentImages[`comment-${postId}`];
+            const images = commentImages[`comment-${postId}`] || [];
             
-            if (!content && !image) {
+            if (!content && images.length === 0) {
                 alert('请输入评论内容或选择图片');
                 return;
             }
@@ -881,7 +1093,7 @@
             post.comments.push({
                 author: currentUser,
                 content: content,
-                image: image || null,
+                images: [...images], // 存储多张图片
                 date: Date.now(),
                 replyTo: null
             });
@@ -894,9 +1106,9 @@
         // 添加回复
         function addReply(postId, commentIndex, replyToAuthor) {
             const content = document.getElementById(`replyText-${postId}-${commentIndex}`).value.trim();
-            const image = commentImages[`reply-${postId}-${commentIndex}`];
+            const images = commentImages[`reply-${postId}-${commentIndex}`] || [];
             
-            if (!content && !image) {
+            if (!content && images.length === 0) {
                 alert('请输入回复内容或选择图片');
                 return;
             }
@@ -905,7 +1117,7 @@
             post.comments.push({
                 author: currentUser,
                 content: content,
-                image: image || null,
+                images: [...images], // 存储多张图片
                 date: Date.now(),
                 replyTo: replyToAuthor
             });
@@ -948,6 +1160,17 @@
                     minute: '2-digit'
                 }).replace(/\//g, '-');
             }
+        }
+
+        // 查看大图
+        function viewImage(imageSrc) {
+            document.getElementById('viewerImage').src = imageSrc;
+            document.getElementById('imageViewer').style.display = 'flex';
+        }
+
+        // 关闭图片查看器
+        function closeImageViewer() {
+            document.getElementById('imageViewer').style.display = 'none';
         }
     </script>
 </body>
