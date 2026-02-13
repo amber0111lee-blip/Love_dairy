@@ -29,7 +29,6 @@
             margin: 0 auto;
         }
 
-        /* 设置页面 */
         .settings-page {
             display: none;
         }
@@ -62,11 +61,6 @@
             text-decoration: none;
         }
 
-        .settings-container .info a:hover {
-            text-decoration: underline;
-        }
-
-        /* 登录页面 */
         .login-container {
             background: #fff;
             border-radius: 20px;
@@ -130,16 +124,11 @@
             transform: translateY(-2px);
         }
 
-        .btn:active {
-            transform: translateY(0);
-        }
-
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
 
-        /* 主页面 */
         .main-container {
             display: none;
         }
@@ -176,7 +165,6 @@
             font-size: 14px;
         }
 
-        /* 发布框 */
         .post-box {
             background: #fff9e6;
             border-radius: 15px;
@@ -210,11 +198,6 @@
             background: white;
         }
 
-        .post-box textarea:focus {
-            outline: none;
-            border-color: #ff69b4;
-        }
-
         .post-actions {
             display: flex;
             gap: 10px;
@@ -237,50 +220,6 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
-            display: inline-block;
-        }
-
-        .file-input-label:hover {
-            background: #ff69b4;
-        }
-
-        #imageInput, .comment-image-input, .reply-image-input {
-            display: none;
-        }
-
-        .image-preview {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .image-preview-item {
-            position: relative;
-            display: inline-block;
-        }
-
-        .image-preview-item img {
-            max-width: 150px;
-            max-height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 3px solid #ffe0f0;
-        }
-
-        .remove-image {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            font-size: 18px;
-            line-height: 1;
         }
 
         .post-btn {
@@ -294,371 +233,10 @@
             font-weight: bold;
         }
 
-        /* 上传进度 */
-        .upload-progress {
-            margin-top: 10px;
-            padding: 10px;
-            background: #fff;
-            border-radius: 8px;
-            border: 2px solid #ffe0f0;
-            display: none;
-        }
-
-        .upload-progress-bar {
-            height: 20px;
-            background: #ffe0f0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-
-        .upload-progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-            transition: width 0.3s;
-        }
-
-        .upload-progress-text {
-            text-align: center;
-            font-size: 13px;
-            color: #666;
-        }
-
-        /* 动态列表样式 */
         .posts-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
-        }
-
-        .post-item {
-            background: #fff9e6;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.15);
-            border: 3px solid #ffe0f0;
-            position: relative;
-        }
-
-        .post-item::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            width: 40px;
-            height: 20px;
-            background: #ffb6c1;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .post-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .post-author {
-            font-weight: bold;
-            color: #ff69b4;
-            font-size: 16px;
-        }
-
-        .post-date {
-            color: #999;
-            font-size: 13px;
-        }
-
-        .post-content {
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            white-space: pre-wrap;
-            font-size: 15px;
-        }
-
-        .post-images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .post-images.single {
-            grid-template-columns: 1fr;
-        }
-
-        .post-images.double {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .post-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 3px solid #ffe0f0;
-            cursor: pointer;
-        }
-
-        .post-images.single .post-image {
-            height: auto;
-            max-height: 400px;
-        }
-
-        .post-images.double .post-image {
-            height: 200px;
-        }
-
-        .post-actions-bar {
-            display: flex;
-            gap: 15px;
-            padding-top: 10px;
-            border-top: 2px dashed #ffe0f0;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            color: #ff69b4;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .action-btn:hover {
-            color: #ff1493;
-        }
-
-        /* 评论区 */
-        .comments-section {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px dashed #ffe0f0;
-        }
-
-        .comment-item {
-            background: white;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: 2px solid #ffe0f0;
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .comment-author {
-            color: #ff69b4;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .comment-date {
-            color: #999;
-            font-size: 12px;
-        }
-
-        .comment-content {
-            color: #333;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .reply-info {
-            color: #666;
-            font-size: 13px;
-            margin-bottom: 5px;
-        }
-
-        .comment-images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-top: 8px;
-        }
-
-        .comment-images.single {
-            grid-template-columns: 1fr;
-        }
-
-        .comment-images.double {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .comment-image {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid #ffe0f0;
-            cursor: pointer;
-        }
-
-        .comment-images.single .comment-image {
-            height: auto;
-            max-height: 200px;
-        }
-
-        .comment-actions {
-            margin-top: 8px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .reply-btn, .delete-comment-btn {
-            background: none;
-            border: none;
-            color: #ff69b4;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .comment-input-area {
-            display: none;
-            margin-top: 10px;
-        }
-
-        .comment-input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ffe0f0;
-            border-radius: 8px;
-            font-size: 14px;
-            resize: vertical;
-            min-height: 60px;
-            font-family: inherit;
-        }
-
-        .comment-input:focus {
-            outline: none;
-            border-color: #ff69b4;
-        }
-
-        .comment-image-preview {
-            margin-top: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .comment-image-preview-item {
-            position: relative;
-            display: inline-block;
-        }
-
-        .comment-image-preview-item img {
-            max-width: 100px;
-            max-height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid #ffe0f0;
-        }
-
-        .remove-comment-image {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            font-size: 16px;
-            line-height: 1;
-        }
-
-        .comment-actions-bar {
-            margin-top: 8px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .comment-image-label {
-            padding: 6px 12px;
-            background: #ffb6c1;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            display: inline-block;
-        }
-
-        .comment-image-label:hover {
-            background: #ff69b4;
-        }
-
-        .comment-submit-btn {
-            padding: 8px 15px;
-            background: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .cancel-comment-btn {
-            padding: 8px 15px;
-            background: #ccc;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .delete-post-btn {
-            background: #ffb6c1;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        /* 图片查看器 */
-        .image-viewer {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .image-viewer img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
-        .image-viewer-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 24px;
-            cursor: pointer;
-            line-height: 1;
         }
 
         .empty-state {
@@ -678,28 +256,13 @@
             body {
                 padding: 10px;
             }
-
-            .login-container {
-                margin-top: 50px;
-                padding: 30px 20px;
-            }
-
-            .header h1 {
-                font-size: 20px;
-            }
-
             .post-actions {
                 flex-direction: column;
-            }
-
-            .date-input {
-                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 登录页面 -->
     <div class="container login-container" id="loginPage">
         <h1>💕 恋爱纪念册 💕</h1>
         <p>记录我们的每一个美好瞬间</p>
@@ -713,33 +276,39 @@
         </div>
         <button class="btn" onclick="login()">登录</button>
         <p style="margin-top: 20px; font-size: 12px; color: #999;">
-            提示:首次使用请直接输入用户名和密码进行注册
+            提示：首次使用请直接输入用户名和密码进行注册
         </p>
     </div>
 
-    <!-- 设置页面 -->
     <div class="container settings-page" id="settingsPage">
         <div class="settings-container">
-            <h2>⚙️ 图床设置</h2>
+            <h2>⚙️ 数据库设置</h2>
             <div class="info">
-                <p><strong>为什么需要设置图床？</strong></p>
-                <p>由于浏览器存储空间有限，我们需要将图片上传到云端。推荐使用 ImgBB（完全免费）。</p>
+                <p><strong>配置 Supabase 云数据库</strong></p>
+                <p>配置后，所有浏览器、所有设备的数据将自动同步。</p>
                 <br>
-                <p><strong>如何获取 API Key？</strong></p>
-                <p>1. 访问 <a href="https://api.imgbb.com/keys" target="_blank">ImgBB API Keys</a></p>
-                <p>2. 用邮箱注册（无需信用卡）</p>
-                <p>3. 复制 API Key 粘贴到下方</p>
+                <p><strong>如何获取配置信息？</strong></p>
+                <p>1. 访问 <a href="https://supabase.com" target="_blank">Supabase</a> 并注册（免费）</p>
+                <p>2. 创建新项目</p>
+                <p>3. 在 Settings → API 中找到配置信息</p>
             </div>
             <div class="input-group">
-                <label>ImgBB API Key</label>
-                <input type="text" id="imgbbApiKey" placeholder="粘贴你的 API Key">
+                <label>Supabase URL</label>
+                <input type="text" id="supabaseUrl" placeholder="https://xxxxx.supabase.co">
             </div>
-            <button class="btn" onclick="saveApiKey()">保存设置</button>
+            <div class="input-group">
+                <label>Supabase Anon Key</label>
+                <input type="text" id="supabaseKey" placeholder="粘贴你的 anon public key">
+            </div>
+            <div class="input-group">
+                <label>ImgBB API Key（图片上传）</label>
+                <input type="text" id="imgbbApiKey" placeholder="粘贴你的 ImgBB API Key">
+            </div>
+            <button class="btn" onclick="saveSettings()">保存设置</button>
             <button class="btn" style="margin-top: 10px; background: #ccc;" onclick="backToMain()">返回</button>
         </div>
     </div>
 
-    <!-- 主页面 -->
     <div class="container main-container" id="mainPage">
         <div class="header">
             <div>
@@ -752,25 +321,16 @@
             </div>
         </div>
 
-        <!-- 发布框 -->
         <div class="post-box">
             <textarea id="postContent" placeholder="写下你想说的话..."></textarea>
-            <div id="imagePreview" class="image-preview"></div>
-            <div id="uploadProgress" class="upload-progress">
-                <div class="upload-progress-bar">
-                    <div id="uploadProgressFill" class="upload-progress-fill" style="width: 0%"></div>
-                </div>
-                <div id="uploadProgressText" class="upload-progress-text">正在上传...</div>
-            </div>
             <div class="post-actions">
                 <input type="datetime-local" id="postDate" class="date-input">
                 <label for="imageInput" class="file-input-label">📷 添加照片</label>
-                <input type="file" id="imageInput" accept="image/*" multiple onchange="previewImage(event)">
+                <input type="file" id="imageInput" accept="image/*" multiple style="display:none">
                 <button class="post-btn" onclick="createPost()">发布</button>
             </div>
         </div>
 
-        <!-- 动态列表 -->
         <div class="posts-container" id="postsContainer">
             <div class="empty-state">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -781,28 +341,38 @@
         </div>
     </div>
 
-    <!-- 图片查看器 -->
-    <div class="image-viewer" id="imageViewer" onclick="closeImageViewer()">
-        <button class="image-viewer-close" onclick="closeImageViewer()">×</button>
-        <img id="viewerImage" src="" alt="查看图片">
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
     <script>
-        // 数据存储
-        let users = JSON.parse(localStorage.getItem('loveDiaryUsers')) || {};
-        let posts = JSON.parse(localStorage.getItem('loveDiaryPosts')) || [];
-        let currentUser = localStorage.getItem('loveDiaryCurrentUser');
+        let supabaseClient = null;
+        let supabaseUrl = localStorage.getItem('supabaseUrl') || '';
+        let supabaseKey = localStorage.getItem('supabaseKey') || '';
         let apiKey = localStorage.getItem('imgbbApiKey') || '';
-        let selectedFiles = []; // 存储待上传的文件
-        let selectedImageUrls = []; // 存储已上传的图片URL
-        let commentImages = {}; // 存储评论图片
+        let users = JSON.parse(localStorage.getItem('loveDiaryUsers')) || {};
+        let currentUser = localStorage.getItem('loveDiaryCurrentUser');
 
-        // 初始化
-        if (currentUser) {
-            showMainPage();
+        function initSupabase() {
+            if (supabaseUrl && supabaseKey) {
+                try {
+                    supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+                    return true;
+                } catch (error) {
+                    console.error('Supabase 初始化失败:', error);
+                    return false;
+                }
+            }
+            return false;
         }
 
-        // 登录
+        initSupabase();
+        if (currentUser) {
+            if (!supabaseUrl || !supabaseKey) {
+                alert('请先配置 Supabase 数据库！');
+                showSettings();
+            } else {
+                showMainPage();
+            }
+        }
+
         function login() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
@@ -816,7 +386,13 @@
                 if (users[username] === password) {
                     currentUser = username;
                     localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                    showMainPage();
+                    
+                    if (!supabaseUrl || !supabaseKey) {
+                        alert('请先配置 Supabase 数据库！');
+                        showSettings();
+                    } else {
+                        showMainPage();
+                    }
                 } else {
                     alert('密码错误');
                 }
@@ -825,12 +401,11 @@
                 localStorage.setItem('loveDiaryUsers', JSON.stringify(users));
                 currentUser = username;
                 localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                alert('注册成功！');
-                showMainPage();
+                alert('注册成功！请配置数据库。');
+                showSettings();
             }
         }
 
-        // 退出登录
         function logout() {
             if (confirm('确定要退出登录吗？')) {
                 localStorage.removeItem('loveDiaryCurrentUser');
@@ -839,560 +414,158 @@
             }
         }
 
-        // 显示设置页面
         function showSettings() {
             document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'none';
             document.getElementById('settingsPage').style.display = 'block';
+            document.getElementById('supabaseUrl').value = supabaseUrl;
+            document.getElementById('supabaseKey').value = supabaseKey;
             document.getElementById('imgbbApiKey').value = apiKey;
         }
 
-        // 保存API Key
-        function saveApiKey() {
-            const key = document.getElementById('imgbbApiKey').value.trim();
-            if (!key) {
-                alert('请输入 API Key');
+        function saveSettings() {
+            const url = document.getElementById('supabaseUrl').value.trim();
+            const key = document.getElementById('supabaseKey').value.trim();
+            const imgKey = document.getElementById('imgbbApiKey').value.trim();
+            
+            if (!url || !key) {
+                alert('请填写 Supabase URL 和 Key');
                 return;
             }
-            apiKey = key;
+            
+            supabaseUrl = url;
+            supabaseKey = key;
+            apiKey = imgKey;
+            
+            localStorage.setItem('supabaseUrl', supabaseUrl);
+            localStorage.setItem('supabaseKey', supabaseKey);
             localStorage.setItem('imgbbApiKey', apiKey);
-            alert('保存成功！');
-            backToMain();
+            
+            if (initSupabase()) {
+                alert('保存成功！');
+                backToMain();
+            } else {
+                alert('配置有误，请检查 URL 和 Key 是否正确');
+            }
         }
 
-        // 返回主页
         function backToMain() {
             document.getElementById('settingsPage').style.display = 'none';
-            document.getElementById('mainPage').style.display = 'block';
+            if (currentUser) {
+                document.getElementById('mainPage').style.display = 'block';
+                loadPosts();
+            } else {
+                document.getElementById('loginPage').style.display = 'block';
+            }
         }
 
-        // 显示主页面
         function showMainPage() {
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('mainPage').style.display = 'block';
             document.getElementById('currentUser').textContent = currentUser;
             
-            // 设置默认时间为当前时间
             const now = new Date();
             const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
             document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
             
-            renderPosts();
+            loadPosts();
         }
 
-        // 上传图片到ImgBB
-        async function uploadToImgBB(file) {
-            if (!apiKey) {
-                throw new Error('请先在设置中配置 ImgBB API Key');
-            }
-
-            const formData = new FormData();
-            formData.append('image', file);
-
-            const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error('图片上传失败');
-            }
-
-            const data = await response.json();
-            return data.data.url;
-        }
-
-        // 图片预览（支持多图）
-        function previewImage(event) {
-            const files = Array.from(event.target.files);
-            if (files.length === 0) return;
-
-            selectedFiles = [...selectedFiles, ...files];
-            renderImagePreview();
-        }
-
-        // 渲染图片预览
-        function renderImagePreview() {
-            const container = document.getElementById('imagePreview');
-            if (selectedFiles.length === 0 && selectedImageUrls.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
-
-            let html = '';
-            
-            // 显示已上传的图片
-            selectedImageUrls.forEach((url, index) => {
-                html += `
-                    <div class="image-preview-item">
-                        <img src="${url}" alt="已上传${index + 1}">
-                        <button class="remove-image" onclick="removeUploadedImage(${index})">×</button>
-                    </div>
-                `;
-            });
-
-            // 显示待上传的图片
-            selectedFiles.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                html += `
-                    <div class="image-preview-item">
-                        <img src="${url}" alt="预览${index + 1}">
-                        <button class="remove-image" onclick="removeFileImage(${index})">×</button>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        // 移除已上传的图片
-        function removeUploadedImage(index) {
-            selectedImageUrls.splice(index, 1);
-            renderImagePreview();
-        }
-
-        // 移除待上传的文件
-        function removeFileImage(index) {
-            selectedFiles.splice(index, 1);
-            renderImagePreview();
-            
-            if (selectedFiles.length === 0) {
-                document.getElementById('imageInput').value = '';
-            }
-        }
-
-        // 显示上传进度
-        function showUploadProgress(current, total) {
-            const progress = document.getElementById('uploadProgress');
-            const fill = document.getElementById('uploadProgressFill');
-            const text = document.getElementById('uploadProgressText');
-            
-            progress.style.display = 'block';
-            const percent = Math.round((current / total) * 100);
-            fill.style.width = percent + '%';
-            text.textContent = `正在上传 ${current}/${total} 张图片...`;
-        }
-
-        function hideUploadProgress() {
-            document.getElementById('uploadProgress').style.display = 'none';
-        }
-
-        // 发布动态
         async function createPost() {
             const content = document.getElementById('postContent').value.trim();
             const postDate = document.getElementById('postDate').value;
 
-            if (!content && selectedFiles.length === 0 && selectedImageUrls.length === 0) {
-                alert('请输入内容或选择图片');
+            if (!content) {
+                alert('请输入内容');
                 return;
             }
 
-            if (!apiKey && selectedFiles.length > 0) {
-                if (confirm('未配置图床，是否前往设置？')) {
-                    showSettings();
-                }
+            if (!supabaseClient) {
+                alert('数据库未配置，请先设置 Supabase');
+                showSettings();
                 return;
             }
 
             try {
-                // 上传新选择的图片
-                const uploadedUrls = [];
-                if (selectedFiles.length > 0) {
-                    for (let i = 0; i < selectedFiles.length; i++) {
-                        showUploadProgress(i + 1, selectedFiles.length);
-                        const url = await uploadToImgBB(selectedFiles[i]);
-                        uploadedUrls.push(url);
-                    }
-                }
-                hideUploadProgress();
+                const eventDate = postDate ? new Date(postDate).toISOString() : new Date().toISOString();
 
-                // 合并所有图片URL
-                const allImages = [...selectedImageUrls, ...uploadedUrls];
+                const result = await supabaseClient
+                    .from('posts')
+                    .insert([
+                        {
+                            post_id: Date.now(),
+                            author: currentUser,
+                            content: content,
+                            images: null,
+                            date: eventDate
+                        }
+                    ])
+                    .select();
 
-                const post = {
-                    id: Date.now(),
-                    author: currentUser,
-                    content: content,
-                    images: allImages,
-                    date: postDate ? new Date(postDate).getTime() : Date.now(),
-                    comments: []
-                };
+                if (result.error) throw result.error;
 
-                posts.unshift(post);
-                localStorage.setItem('loveDiaryPosts', JSON.stringify(posts));
-
-                // 清空输入
                 document.getElementById('postContent').value = '';
-                selectedFiles = [];
-                selectedImageUrls = [];
-                renderImagePreview();
-                document.getElementById('imageInput').value = '';
-                
-                // 重置时间
                 const now = new Date();
                 const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
                 document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
 
-                renderPosts();
+                await loadPosts();
+                alert('发布成功！');
             } catch (error) {
-                hideUploadProgress();
                 alert('发布失败：' + error.message);
+                console.error(error);
             }
         }
 
-        // 渲染动态列表
-        function renderPosts() {
+        async function loadPosts() {
+            if (!supabaseClient) {
+                document.getElementById('postsContainer').innerHTML = '<div class="empty-state"><p style="color: #ff69b4;">请先配置 Supabase 数据库</p><button class="btn" onclick="showSettings()" style="margin-top: 20px; width: auto; padding: 10px 30px;">前往设置</button></div>';
+                return;
+            }
+
+            try {
+                const result = await supabaseClient
+                    .from('posts')
+                    .select('*')
+                    .order('date', { ascending: false });
+
+                if (result.error) {
+                    console.error('加载错误详情:', result.error);
+                    throw result.error;
+                }
+
+                const posts = result.data || [];
+                renderPosts(posts);
+            } catch (error) {
+                console.error('加载失败:', error);
+                document.getElementById('postsContainer').innerHTML = '<div class="empty-state"><p style="color: #ff1493;">加载数据失败，请检查配置</p><p style="font-size: 12px; margin-top: 10px;">错误: ' + error.message + '</p></div>';
+            }
+        }
+
+        function renderPosts(posts) {
             const container = document.getElementById('postsContainer');
             
-            if (posts.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                        <p>还没有记录哦，快来发布第一条动态吧！</p>
-                    </div>
-                `;
+            if (!posts || posts.length === 0) {
+                container.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><p>还没有记录哦，快来发布第一条动态吧！</p></div>';
                 return;
             }
 
-            const sortedPosts = [...posts].sort((a, b) => b.date - a.date);
-
-            container.innerHTML = sortedPosts.map(post => {
-                const images = post.images || [];
-                const imageClass = images.length === 1 ? 'single' : images.length === 2 ? 'double' : '';
-                
-                return `
-                    <div class="post-item">
-                        <div class="post-header">
-                            <span class="post-author">${post.author}</span>
-                            <div>
-                                <span class="post-date">${formatDate(post.date)}</span>
-                                ${post.author === currentUser ? `
-                                    <button class="delete-post-btn" onclick="deletePost(${post.id})">删除</button>
-                                ` : ''}
-                            </div>
-                        </div>
-                        ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
-                        ${images.length > 0 ? `
-                            <div class="post-images ${imageClass}">
-                                ${images.map(img => `
-                                    <img src="${img}" alt="图片" class="post-image" onclick="viewImage('${img}')">
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                        <div class="post-actions-bar">
-                            <button class="action-btn" onclick="toggleCommentInput(${post.id})">
-                                💬 评论 (${post.comments.length})
-                            </button>
-                        </div>
-                        <div id="commentInput-${post.id}" class="comment-input-area">
-                            <textarea class="comment-input" id="commentText-${post.id}" placeholder="写下你的评论..."></textarea>
-                            <div id="commentImagePreview-${post.id}" class="comment-image-preview"></div>
-                            <div class="comment-actions-bar">
-                                <label for="commentImageInput-${post.id}" class="comment-image-label">📷</label>
-                                <input type="file" class="comment-image-input" id="commentImageInput-${post.id}" accept="image/*" multiple onchange="previewCommentImage(event, ${post.id})">
-                                <button class="comment-submit-btn" onclick="addComment(${post.id})">发送</button>
-                                <button class="cancel-comment-btn" onclick="toggleCommentInput(${post.id})">取消</button>
-                            </div>
-                        </div>
-                        ${post.comments.length > 0 ? `
-                            <div class="comments-section">
-                                ${post.comments.map((comment, index) => {
-                                    const commentImages = comment.images || [];
-                                    const commentImageClass = commentImages.length === 1 ? 'single' : commentImages.length === 2 ? 'double' : '';
-                                    
-                                    return `
-                                        <div class="comment-item">
-                                            <div class="comment-header">
-                                                <span class="comment-author">${comment.author}</span>
-                                                <span class="comment-date">${formatDate(comment.date)}</span>
-                                            </div>
-                                            ${comment.replyTo ? `<div class="reply-info">回复 @${comment.replyTo}</div>` : ''}
-                                            ${comment.content ? `<div class="comment-content">${comment.content}</div>` : ''}
-                                            ${commentImages.length > 0 ? `
-                                                <div class="comment-images ${commentImageClass}">
-                                                    ${commentImages.map(img => `
-                                                        <img src="${img}" alt="图片" class="comment-image" onclick="viewImage('${img}')">
-                                                    `).join('')}
-                                                </div>
-                                            ` : ''}
-                                            <div class="comment-actions">
-                                                <button class="reply-btn" onclick="toggleReplyInput(${post.id}, ${index}, '${comment.author}')">回复</button>
-                                                ${comment.author === currentUser ? `
-                                                    <button class="delete-comment-btn" onclick="deleteComment(${post.id}, ${index})">删除</button>
-                                                ` : ''}
-                                            </div>
-                                            <div id="replyInput-${post.id}-${index}" class="comment-input-area">
-                                                <textarea class="comment-input" id="replyText-${post.id}-${index}" placeholder="回复 ${comment.author}..."></textarea>
-                                                <div id="replyImagePreview-${post.id}-${index}" class="comment-image-preview"></div>
-                                                <div class="comment-actions-bar">
-                                                    <label for="replyImageInput-${post.id}-${index}" class="comment-image-label">📷</label>
-                                                    <input type="file" class="reply-image-input" id="replyImageInput-${post.id}-${index}" accept="image/*" multiple onchange="previewReplyImage(event, ${post.id}, ${index})">
-                                                    <button class="comment-submit-btn" onclick="addReply(${post.id}, ${index}, '${comment.author}')">发送</button>
-                                                    <button class="cancel-comment-btn" onclick="toggleReplyInput(${post.id}, ${index})">取消</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // 删除动态
-        function deletePost(postId) {
-            if (confirm('确定要删除这条动态吗？')) {
-                posts = posts.filter(p => p.id !== postId);
-                localStorage.setItem('loveDiaryPosts', JSON.stringify(posts));
-                renderPosts();
-            }
-        }
-
-        // 评论图片预览
-        function previewCommentImage(event, postId) {
-            const files = Array.from(event.target.files);
-            if (files.length === 0) return;
-
-            if (!commentImages[`comment-${postId}`]) {
-                commentImages[`comment-${postId}`] = { files: [], urls: [] };
-            }
-
-            commentImages[`comment-${postId}`].files = [...commentImages[`comment-${postId}`].files, ...files];
-            renderCommentImagePreview(postId);
-        }
-
-        function renderCommentImagePreview(postId) {
-            const container = document.getElementById(`commentImagePreview-${postId}`);
-            const data = commentImages[`comment-${postId}`];
-            
-            if (!data || (data.files.length === 0 && data.urls.length === 0)) {
-                container.innerHTML = '';
-                return;
-            }
-
-            let html = '';
-            
-            data.urls.forEach((url, index) => {
-                html += `
-                    <div class="comment-image-preview-item">
-                        <img src="${url}" alt="已上传${index + 1}">
-                        <button class="remove-comment-image" onclick="removeCommentUploadedImage(${postId}, ${index})">×</button>
-                    </div>
-                `;
+            container.innerHTML = '';
+            posts.forEach(function(post) {
+                const div = document.createElement('div');
+                div.className = 'post-box';
+                div.innerHTML = '<strong>' + escapeHtml(post.author) + '</strong> - ' + formatDate(new Date(post.date).getTime()) + '<br><br>' + escapeHtml(post.content);
+                container.appendChild(div);
             });
-
-            data.files.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                html += `
-                    <div class="comment-image-preview-item">
-                        <img src="${url}" alt="预览${index + 1}">
-                        <button class="remove-comment-image" onclick="removeCommentFileImage(${postId}, ${index})">×</button>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
         }
 
-        function removeCommentUploadedImage(postId, index) {
-            commentImages[`comment-${postId}`].urls.splice(index, 1);
-            renderCommentImagePreview(postId);
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
-        function removeCommentFileImage(postId, index) {
-            commentImages[`comment-${postId}`].files.splice(index, 1);
-            renderCommentImagePreview(postId);
-        }
-
-        // 回复图片预览
-        function previewReplyImage(event, postId, commentIndex) {
-            const files = Array.from(event.target.files);
-            if (files.length === 0) return;
-
-            const key = `reply-${postId}-${commentIndex}`;
-            if (!commentImages[key]) {
-                commentImages[key] = { files: [], urls: [] };
-            }
-
-            commentImages[key].files = [...commentImages[key].files, ...files];
-            renderReplyImagePreview(postId, commentIndex);
-        }
-
-        function renderReplyImagePreview(postId, commentIndex) {
-            const container = document.getElementById(`replyImagePreview-${postId}-${commentIndex}`);
-            const key = `reply-${postId}-${commentIndex}`;
-            const data = commentImages[key];
-            
-            if (!data || (data.files.length === 0 && data.urls.length === 0)) {
-                container.innerHTML = '';
-                return;
-            }
-
-            let html = '';
-            
-            data.urls.forEach((url, index) => {
-                html += `
-                    <div class="comment-image-preview-item">
-                        <img src="${url}" alt="已上传${index + 1}">
-                        <button class="remove-comment-image" onclick="removeReplyUploadedImage(${postId}, ${commentIndex}, ${index})">×</button>
-                    </div>
-                `;
-            });
-
-            data.files.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                html += `
-                    <div class="comment-image-preview-item">
-                        <img src="${url}" alt="预览${index + 1}">
-                        <button class="remove-comment-image" onclick="removeReplyFileImage(${postId}, ${commentIndex}, ${index})">×</button>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        function removeReplyUploadedImage(postId, commentIndex, index) {
-            const key = `reply-${postId}-${commentIndex}`;
-            commentImages[key].urls.splice(index, 1);
-            renderReplyImagePreview(postId, commentIndex);
-        }
-
-        function removeReplyFileImage(postId, commentIndex, index) {
-            const key = `reply-${postId}-${commentIndex}`;
-            commentImages[key].files.splice(index, 1);
-            renderReplyImagePreview(postId, commentIndex);
-        }
-
-        // 切换评论输入框
-        function toggleCommentInput(postId) {
-            const inputArea = document.getElementById(`commentInput-${postId}`);
-            if (inputArea.style.display === 'block') {
-                inputArea.style.display = 'none';
-                delete commentImages[`comment-${postId}`];
-                renderCommentImagePreview(postId);
-            } else {
-                inputArea.style.display = 'block';
-                document.getElementById(`commentText-${postId}`).focus();
-            }
-        }
-
-        // 切换回复输入框
-        function toggleReplyInput(postId, commentIndex) {
-            const inputArea = document.getElementById(`replyInput-${postId}-${commentIndex}`);
-            if (inputArea.style.display === 'block') {
-                inputArea.style.display = 'none';
-                delete commentImages[`reply-${postId}-${commentIndex}`];
-                renderReplyImagePreview(postId, commentIndex);
-            } else {
-                inputArea.style.display = 'block';
-                document.getElementById(`replyText-${postId}-${commentIndex}`).focus();
-            }
-        }
-
-        // 添加评论
-        async function addComment(postId) {
-            const content = document.getElementById(`commentText-${postId}`).value.trim();
-            const data = commentImages[`comment-${postId}`];
-            
-            if (!content && (!data || (data.files.length === 0 && data.urls.length === 0))) {
-                alert('请输入评论内容或选择图片');
-                return;
-            }
-
-            try {
-                const uploadedUrls = [];
-                if (data && data.files.length > 0) {
-                    if (!apiKey) {
-                        if (confirm('未配置图床，是否前往设置？')) {
-                            showSettings();
-                        }
-                        return;
-                    }
-                    for (const file of data.files) {
-                        const url = await uploadToImgBB(file);
-                        uploadedUrls.push(url);
-                    }
-                }
-
-                const allImages = data ? [...(data.urls || []), ...uploadedUrls] : [];
-
-                const post = posts.find(p => p.id === postId);
-                post.comments.push({
-                    author: currentUser,
-                    content: content,
-                    images: allImages,
-                    date: Date.now(),
-                    replyTo: null
-                });
-
-                localStorage.setItem('loveDiaryPosts', JSON.stringify(posts));
-                delete commentImages[`comment-${postId}`];
-                renderPosts();
-            } catch (error) {
-                alert('评论失败：' + error.message);
-            }
-        }
-
-        // 添加回复
-        async function addReply(postId, commentIndex, replyToAuthor) {
-            const content = document.getElementById(`replyText-${postId}-${commentIndex}`).value.trim();
-            const key = `reply-${postId}-${commentIndex}`;
-            const data = commentImages[key];
-            
-            if (!content && (!data || (data.files.length === 0 && data.urls.length === 0))) {
-                alert('请输入回复内容或选择图片');
-                return;
-            }
-
-            try {
-                const uploadedUrls = [];
-                if (data && data.files.length > 0) {
-                    if (!apiKey) {
-                        if (confirm('未配置图床，是否前往设置？')) {
-                            showSettings();
-                        }
-                        return;
-                    }
-                    for (const file of data.files) {
-                        const url = await uploadToImgBB(file);
-                        uploadedUrls.push(url);
-                    }
-                }
-
-                const allImages = data ? [...(data.urls || []), ...uploadedUrls] : [];
-
-                const post = posts.find(p => p.id === postId);
-                post.comments.push({
-                    author: currentUser,
-                    content: content,
-                    images: allImages,
-                    date: Date.now(),
-                    replyTo: replyToAuthor
-                });
-
-                localStorage.setItem('loveDiaryPosts', JSON.stringify(posts));
-                delete commentImages[key];
-                renderPosts();
-            } catch (error) {
-                alert('回复失败：' + error.message);
-            }
-        }
-
-        // 删除评论
-        function deleteComment(postId, commentIndex) {
-            if (confirm('确定要删除这条评论吗？')) {
-                const post = posts.find(p => p.id === postId);
-                post.comments.splice(commentIndex, 1);
-                localStorage.setItem('loveDiaryPosts', JSON.stringify(posts));
-                renderPosts();
-            }
-        }
-
-        // 格式化日期
         function formatDate(timestamp) {
             const date = new Date(timestamp);
             const now = new Date();
@@ -1404,8 +577,6 @@
                 return Math.floor(diff / 60000) + '分钟前';
             } else if (diff < 86400000 && date.getDate() === now.getDate()) {
                 return '今天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
-            } else if (diff < 172800000 && date.getDate() === now.getDate() - 1) {
-                return '昨天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
             } else {
                 return date.toLocaleDateString('zh-CN', { 
                     year: 'numeric', 
@@ -1415,17 +586,6 @@
                     minute: '2-digit'
                 }).replace(/\//g, '-');
             }
-        }
-
-        // 查看大图
-        function viewImage(imageSrc) {
-            document.getElementById('viewerImage').src = imageSrc;
-            document.getElementById('imageViewer').style.display = 'flex';
-        }
-
-        // 关闭图片查看器
-        function closeImageViewer() {
-            document.getElementById('imageViewer').style.display = 'none';
         }
     </script>
 </body>
