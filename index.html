@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#ff69b4">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>恋爱纪念册 💕</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
     <style>
@@ -198,6 +196,11 @@
             background: white;
         }
 
+        .post-box textarea:focus {
+            outline: none;
+            border-color: #ff69b4;
+        }
+
         .post-actions {
             display: flex;
             gap: 10px;
@@ -222,6 +225,10 @@
             font-size: 14px;
         }
 
+        .file-input-label:hover {
+            background: #ff69b4;
+        }
+
         .post-btn {
             padding: 10px 25px;
             background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
@@ -233,10 +240,391 @@
             font-weight: bold;
         }
 
+        .image-preview {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .image-preview-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-preview-item img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #ffe0f0;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .upload-progress {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            border: 2px solid #ffe0f0;
+            display: none;
+        }
+
+        .upload-progress-bar {
+            height: 20px;
+            background: #ffe0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .upload-progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            transition: width 0.3s;
+        }
+
+        .upload-progress-text {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
         .posts-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
+        }
+
+        .post-item {
+            background: #fff9e6;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.15);
+            border: 3px solid #ffe0f0;
+            position: relative;
+        }
+
+        .post-item::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            width: 40px;
+            height: 20px;
+            background: #ffb6c1;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-author {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 16px;
+        }
+
+        .post-date {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .post-content {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+            font-size: 15px;
+        }
+
+        .post-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .post-images.single {
+            grid-template-columns: 1fr;
+        }
+
+        .post-images.double {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #ffe0f0;
+            cursor: pointer;
+        }
+
+        .post-images.single .post-image {
+            height: auto;
+            max-height: 400px;
+        }
+
+        .post-images.double .post-image {
+            height: 200px;
+        }
+
+        .post-actions-bar {
+            display: flex;
+            gap: 15px;
+            padding-top: 10px;
+            border-top: 2px dashed #ffe0f0;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #ff69b4;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .delete-post-btn {
+            background: #ffb6c1;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .comments-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffe0f0;
+        }
+
+        .comment-item {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #ffe0f0;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .comment-author {
+            color: #ff69b4;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .comment-date {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .comment-content {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .reply-info {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .comment-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .comment-images.single {
+            grid-template-columns: 1fr;
+        }
+
+        .comment-images.double {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .comment-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ffe0f0;
+            cursor: pointer;
+        }
+
+        .comment-images.single .comment-image {
+            height: auto;
+            max-height: 200px;
+        }
+
+        .comment-actions {
+            margin-top: 8px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .reply-btn, .delete-comment-btn {
+            background: none;
+            border: none;
+            color: #ff69b4;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .comment-input-area {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ffe0f0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 60px;
+            font-family: inherit;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #ff69b4;
+        }
+
+        .comment-image-preview {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .comment-image-preview-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .comment-image-preview-item img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ffe0f0;
+        }
+
+        .remove-comment-image {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .comment-actions-bar {
+            margin-top: 8px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .comment-image-label {
+            padding: 6px 12px;
+            background: #ffb6c1;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .comment-submit-btn {
+            padding: 8px 15px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .cancel-comment-btn {
+            padding: 8px 15px;
+            background: #ccc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .image-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .image-viewer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
         }
 
         .empty-state {
@@ -258,6 +646,9 @@
             }
             .post-actions {
                 flex-direction: column;
+            }
+            .date-input {
+                width: 100%;
             }
         }
     </style>
@@ -288,8 +679,8 @@
                 <p>配置后，所有浏览器、所有设备的数据将自动同步。</p>
                 <br>
                 <p><strong>如何获取配置信息？</strong></p>
-                <p>1. 访问 <a href="https://supabase.com" target="_blank">Supabase</a> 并注册（免费）</p>
-                <p>2. 创建新项目</p>
+                <p>1. 访问 <a href="https://supabase.com" target="_blank">Supabase</a> 并注册</p>
+                <p>2. 创建新项目并创建数据表（参考配置指南）</p>
                 <p>3. 在 Settings → API 中找到配置信息</p>
             </div>
             <div class="input-group">
@@ -323,6 +714,13 @@
 
         <div class="post-box">
             <textarea id="postContent" placeholder="写下你想说的话..."></textarea>
+            <div id="imagePreview" class="image-preview"></div>
+            <div id="uploadProgress" class="upload-progress">
+                <div class="upload-progress-bar">
+                    <div id="uploadProgressFill" class="upload-progress-fill" style="width: 0%"></div>
+                </div>
+                <div id="uploadProgressText" class="upload-progress-text">正在上传...</div>
+            </div>
             <div class="post-actions">
                 <input type="datetime-local" id="postDate" class="date-input">
                 <label for="imageInput" class="file-input-label">📷 添加照片</label>
@@ -341,6 +739,11 @@
         </div>
     </div>
 
+    <div class="image-viewer" id="imageViewer" onclick="closeImageViewer()">
+        <button class="image-viewer-close" onclick="closeImageViewer()">×</button>
+        <img id="viewerImage" src="" alt="查看图片">
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
     <script>
         let supabaseClient = null;
@@ -349,6 +752,9 @@
         let apiKey = localStorage.getItem('imgbbApiKey') || '';
         let users = JSON.parse(localStorage.getItem('loveDiaryUsers')) || {};
         let currentUser = localStorage.getItem('loveDiaryCurrentUser');
+        let selectedFiles = [];
+        let selectedImageUrls = [];
+        let commentImages = {};
 
         function initSupabase() {
             if (supabaseUrl && supabaseKey) {
@@ -468,15 +874,122 @@
             const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
             document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
             
+            setupImageInput();
             loadPosts();
+        }
+
+        function setupImageInput() {
+            document.getElementById('imageInput').addEventListener('change', function(e) {
+                const files = Array.from(e.target.files);
+                if (files.length === 0) return;
+                
+                selectedFiles = [...selectedFiles, ...files];
+                renderImagePreview();
+            });
+        }
+
+        function renderImagePreview() {
+            const container = document.getElementById('imagePreview');
+            if (selectedFiles.length === 0 && selectedImageUrls.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = '';
+            
+            selectedImageUrls.forEach((url, index) => {
+                const div = document.createElement('div');
+                div.className = 'image-preview-item';
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = '已上传' + (index + 1);
+                
+                const btn = document.createElement('button');
+                btn.className = 'remove-image';
+                btn.textContent = '×';
+                btn.onclick = function() { removeUploadedImage(index); };
+                
+                div.appendChild(img);
+                div.appendChild(btn);
+                container.appendChild(div);
+            });
+
+            selectedFiles.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'image-preview-item';
+                
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.alt = '预览' + (index + 1);
+                
+                const btn = document.createElement('button');
+                btn.className = 'remove-image';
+                btn.textContent = '×';
+                btn.onclick = function() { removeFileImage(index); };
+                
+                div.appendChild(img);
+                div.appendChild(btn);
+                container.appendChild(div);
+            });
+        }
+
+        function removeUploadedImage(index) {
+            selectedImageUrls.splice(index, 1);
+            renderImagePreview();
+        }
+
+        function removeFileImage(index) {
+            selectedFiles.splice(index, 1);
+            renderImagePreview();
+            
+            if (selectedFiles.length === 0) {
+                document.getElementById('imageInput').value = '';
+            }
+        }
+
+        async function uploadToImgBB(file) {
+            if (!apiKey) {
+                throw new Error('请先在设置中配置 ImgBB API Key');
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const response = await fetch('https://api.imgbb.com/1/upload?key=' + apiKey, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('图片上传失败');
+            }
+
+            const data = await response.json();
+            return data.data.url;
+        }
+
+        function showUploadProgress(current, total) {
+            const progress = document.getElementById('uploadProgress');
+            const fill = document.getElementById('uploadProgressFill');
+            const text = document.getElementById('uploadProgressText');
+            
+            progress.style.display = 'block';
+            const percent = Math.round((current / total) * 100);
+            fill.style.width = percent + '%';
+            text.textContent = '正在上传 ' + current + '/' + total + ' 张图片...';
+        }
+
+        function hideUploadProgress() {
+            document.getElementById('uploadProgress').style.display = 'none';
         }
 
         async function createPost() {
             const content = document.getElementById('postContent').value.trim();
             const postDate = document.getElementById('postDate').value;
 
-            if (!content) {
-                alert('请输入内容');
+            if (!content && selectedFiles.length === 0 && selectedImageUrls.length === 0) {
+                alert('请输入内容或选择图片');
                 return;
             }
 
@@ -487,6 +1000,23 @@
             }
 
             try {
+                const uploadedUrls = [];
+                if (selectedFiles.length > 0) {
+                    if (!apiKey) {
+                        if (confirm('未配置图床，是否前往设置？')) {
+                            showSettings();
+                        }
+                        return;
+                    }
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        showUploadProgress(i + 1, selectedFiles.length);
+                        const url = await uploadToImgBB(selectedFiles[i]);
+                        uploadedUrls.push(url);
+                    }
+                }
+                hideUploadProgress();
+
+                const allImages = [...selectedImageUrls, ...uploadedUrls];
                 const eventDate = postDate ? new Date(postDate).toISOString() : new Date().toISOString();
 
                 const result = await supabaseClient
@@ -495,8 +1025,8 @@
                         {
                             post_id: Date.now(),
                             author: currentUser,
-                            content: content,
-                            images: null,
+                            content: content || null,
+                            images: allImages.length > 0 ? allImages : null,
                             date: eventDate
                         }
                     ])
@@ -505,6 +1035,11 @@
                 if (result.error) throw result.error;
 
                 document.getElementById('postContent').value = '';
+                selectedFiles = [];
+                selectedImageUrls = [];
+                renderImagePreview();
+                document.getElementById('imageInput').value = '';
+                
                 const now = new Date();
                 const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
                 document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
@@ -512,6 +1047,7 @@
                 await loadPosts();
                 alert('发布成功！');
             } catch (error) {
+                hideUploadProgress();
                 alert('发布失败：' + error.message);
                 console.error(error);
             }
@@ -519,44 +1055,646 @@
 
         async function loadPosts() {
             if (!supabaseClient) {
-                document.getElementById('postsContainer').innerHTML = '<div class="empty-state"><p style="color: #ff69b4;">请先配置 Supabase 数据库</p><button class="btn" onclick="showSettings()" style="margin-top: 20px; width: auto; padding: 10px 30px;">前往设置</button></div>';
+                const container = document.getElementById('postsContainer');
+                container.innerHTML = '';
+                const div = document.createElement('div');
+                div.className = 'empty-state';
+                div.innerHTML = '<p style="color: #ff69b4;">请先配置 Supabase 数据库</p>';
+                const btn = document.createElement('button');
+                btn.className = 'btn';
+                btn.textContent = '前往设置';
+                btn.style.marginTop = '20px';
+                btn.style.width = 'auto';
+                btn.style.padding = '10px 30px';
+                btn.onclick = showSettings;
+                div.appendChild(btn);
+                container.appendChild(div);
                 return;
             }
 
             try {
-                const result = await supabaseClient
+                const postsResult = await supabaseClient
                     .from('posts')
                     .select('*')
                     .order('date', { ascending: false });
 
-                if (result.error) {
-                    console.error('加载错误详情:', result.error);
-                    throw result.error;
-                }
+                if (postsResult.error) throw postsResult.error;
 
-                const posts = result.data || [];
-                renderPosts(posts);
+                const commentsResult = await supabaseClient
+                    .from('comments')
+                    .select('*')
+                    .order('date', { ascending: true });
+
+                if (commentsResult.error) throw commentsResult.error;
+
+                const posts = postsResult.data || [];
+                const comments = commentsResult.data || [];
+
+                const postsWithComments = posts.map(post => {
+                    return {
+                        ...post,
+                        comments: comments.filter(c => c.post_id === post.post_id)
+                    };
+                });
+
+                renderPosts(postsWithComments);
             } catch (error) {
                 console.error('加载失败:', error);
-                document.getElementById('postsContainer').innerHTML = '<div class="empty-state"><p style="color: #ff1493;">加载数据失败，请检查配置</p><p style="font-size: 12px; margin-top: 10px;">错误: ' + error.message + '</p></div>';
+                const container = document.getElementById('postsContainer');
+                container.innerHTML = '<div class="empty-state"><p style="color: #ff1493;">加载数据失败：' + escapeHtml(error.message) + '</p></div>';
             }
         }
 
         function renderPosts(posts) {
             const container = document.getElementById('postsContainer');
+            container.innerHTML = '';
             
             if (!posts || posts.length === 0) {
-                container.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><p>还没有记录哦，快来发布第一条动态吧！</p></div>';
+                const div = document.createElement('div');
+                div.className = 'empty-state';
+                div.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><p>还没有记录哦，快来发布第一条动态吧！</p>';
+                container.appendChild(div);
+                return;
+            }
+
+            posts.forEach(post => {
+                const postDiv = createPostElement(post);
+                container.appendChild(postDiv);
+            });
+        }
+
+        function createPostElement(post) {
+            const div = document.createElement('div');
+            div.className = 'post-item';
+            
+            const header = document.createElement('div');
+            header.className = 'post-header';
+            
+            const author = document.createElement('span');
+            author.className = 'post-author';
+            author.textContent = post.author;
+            
+            const rightDiv = document.createElement('div');
+            const date = document.createElement('span');
+            date.className = 'post-date';
+            date.textContent = formatDate(new Date(post.date).getTime());
+            rightDiv.appendChild(date);
+            
+            if (post.author === currentUser) {
+                const delBtn = document.createElement('button');
+                delBtn.className = 'delete-post-btn';
+                delBtn.textContent = '删除';
+                delBtn.onclick = function() { deletePost(post.post_id); };
+                rightDiv.appendChild(delBtn);
+            }
+            
+            header.appendChild(author);
+            header.appendChild(rightDiv);
+            div.appendChild(header);
+            
+            if (post.content) {
+                const content = document.createElement('div');
+                content.className = 'post-content';
+                content.textContent = post.content;
+                div.appendChild(content);
+            }
+            
+            if (post.images && post.images.length > 0) {
+                const imagesDiv = document.createElement('div');
+                imagesDiv.className = 'post-images';
+                if (post.images.length === 1) imagesDiv.classList.add('single');
+                if (post.images.length === 2) imagesDiv.classList.add('double');
+                
+                post.images.forEach(imgUrl => {
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    img.alt = '图片';
+                    img.className = 'post-image';
+                    img.onclick = function() { viewImage(imgUrl); };
+                    imagesDiv.appendChild(img);
+                });
+                
+                div.appendChild(imagesDiv);
+            }
+            
+            const actionsBar = document.createElement('div');
+            actionsBar.className = 'post-actions-bar';
+            
+            const commentBtn = document.createElement('button');
+            commentBtn.className = 'action-btn';
+            commentBtn.textContent = '💬 评论 (' + post.comments.length + ')';
+            commentBtn.onclick = function() { toggleCommentInput(post.post_id); };
+            actionsBar.appendChild(commentBtn);
+            
+            div.appendChild(actionsBar);
+            
+            const commentInputDiv = createCommentInputArea(post.post_id);
+            div.appendChild(commentInputDiv);
+            
+            if (post.comments && post.comments.length > 0) {
+                const commentsSection = document.createElement('div');
+                commentsSection.className = 'comments-section';
+                
+                post.comments.forEach(comment => {
+                    const commentDiv = createCommentElement(comment, post.post_id);
+                    commentsSection.appendChild(commentDiv);
+                });
+                
+                div.appendChild(commentsSection);
+            }
+            
+            return div;
+        }
+
+        function createCommentInputArea(postId) {
+            const div = document.createElement('div');
+            div.id = 'commentInput-' + postId;
+            div.className = 'comment-input-area';
+            
+            const textarea = document.createElement('textarea');
+            textarea.className = 'comment-input';
+            textarea.id = 'commentText-' + postId;
+            textarea.placeholder = '写下你的评论...';
+            div.appendChild(textarea);
+            
+            const previewDiv = document.createElement('div');
+            previewDiv.id = 'commentImagePreview-' + postId;
+            previewDiv.className = 'comment-image-preview';
+            div.appendChild(previewDiv);
+            
+            const actionsBar = document.createElement('div');
+            actionsBar.className = 'comment-actions-bar';
+            
+            const label = document.createElement('label');
+            label.htmlFor = 'commentImageInput-' + postId;
+            label.className = 'comment-image-label';
+            label.textContent = '📷';
+            
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.id = 'commentImageInput-' + postId;
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.style.display = 'none';
+            input.onchange = function(e) { previewCommentImage(e, postId); };
+            
+            const submitBtn = document.createElement('button');
+            submitBtn.className = 'comment-submit-btn';
+            submitBtn.textContent = '发送';
+            submitBtn.onclick = function() { addComment(postId); };
+            
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'cancel-comment-btn';
+            cancelBtn.textContent = '取消';
+            cancelBtn.onclick = function() { toggleCommentInput(postId); };
+            
+            actionsBar.appendChild(label);
+            actionsBar.appendChild(input);
+            actionsBar.appendChild(submitBtn);
+            actionsBar.appendChild(cancelBtn);
+            div.appendChild(actionsBar);
+            
+            return div;
+        }
+
+        function createCommentElement(comment, postId) {
+            const div = document.createElement('div');
+            div.className = 'comment-item';
+            
+            const header = document.createElement('div');
+            header.className = 'comment-header';
+            
+            const author = document.createElement('span');
+            author.className = 'comment-author';
+            author.textContent = comment.author;
+            
+            const date = document.createElement('span');
+            date.className = 'comment-date';
+            date.textContent = formatDate(new Date(comment.date).getTime());
+            
+            header.appendChild(author);
+            header.appendChild(date);
+            div.appendChild(header);
+            
+            if (comment.reply_to) {
+                const replyInfo = document.createElement('div');
+                replyInfo.className = 'reply-info';
+                replyInfo.textContent = '回复 @' + comment.reply_to;
+                div.appendChild(replyInfo);
+            }
+            
+            if (comment.content) {
+                const content = document.createElement('div');
+                content.className = 'comment-content';
+                content.textContent = comment.content;
+                div.appendChild(content);
+            }
+            
+            if (comment.images && comment.images.length > 0) {
+                const imagesDiv = document.createElement('div');
+                imagesDiv.className = 'comment-images';
+                if (comment.images.length === 1) imagesDiv.classList.add('single');
+                if (comment.images.length === 2) imagesDiv.classList.add('double');
+                
+                comment.images.forEach(imgUrl => {
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    img.alt = '图片';
+                    img.className = 'comment-image';
+                    img.onclick = function() { viewImage(imgUrl); };
+                    imagesDiv.appendChild(img);
+                });
+                
+                div.appendChild(imagesDiv);
+            }
+            
+            const actions = document.createElement('div');
+            actions.className = 'comment-actions';
+            
+            const replyBtn = document.createElement('button');
+            replyBtn.className = 'reply-btn';
+            replyBtn.textContent = '回复';
+            replyBtn.onclick = function() { toggleReplyInput(postId, comment.id, comment.author); };
+            actions.appendChild(replyBtn);
+            
+            if (comment.author === currentUser) {
+                const delBtn = document.createElement('button');
+                delBtn.className = 'delete-comment-btn';
+                delBtn.textContent = '删除';
+                delBtn.onclick = function() { deleteComment(comment.id); };
+                actions.appendChild(delBtn);
+            }
+            
+            div.appendChild(actions);
+            
+            const replyInputDiv = createReplyInputArea(postId, comment.id, comment.author);
+            div.appendChild(replyInputDiv);
+            
+            return div;
+        }
+
+        function createReplyInputArea(postId, commentId, authorName) {
+            const div = document.createElement('div');
+            div.id = 'replyInput-' + postId + '-' + commentId;
+            div.className = 'comment-input-area';
+            
+            const textarea = document.createElement('textarea');
+            textarea.className = 'comment-input';
+            textarea.id = 'replyText-' + postId + '-' + commentId;
+            textarea.placeholder = '回复 ' + authorName + '...';
+            div.appendChild(textarea);
+            
+            const previewDiv = document.createElement('div');
+            previewDiv.id = 'replyImagePreview-' + postId + '-' + commentId;
+            previewDiv.className = 'comment-image-preview';
+            div.appendChild(previewDiv);
+            
+            const actionsBar = document.createElement('div');
+            actionsBar.className = 'comment-actions-bar';
+            
+            const label = document.createElement('label');
+            label.htmlFor = 'replyImageInput-' + postId + '-' + commentId;
+            label.className = 'comment-image-label';
+            label.textContent = '📷';
+            
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.id = 'replyImageInput-' + postId + '-' + commentId;
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.style.display = 'none';
+            input.onchange = function(e) { previewReplyImage(e, postId, commentId); };
+            
+            const submitBtn = document.createElement('button');
+            submitBtn.className = 'comment-submit-btn';
+            submitBtn.textContent = '发送';
+            submitBtn.onclick = function() { addReply(postId, authorName, commentId); };
+            
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'cancel-comment-btn';
+            cancelBtn.textContent = '取消';
+            cancelBtn.onclick = function() { toggleReplyInput(postId, commentId); };
+            
+            actionsBar.appendChild(label);
+            actionsBar.appendChild(input);
+            actionsBar.appendChild(submitBtn);
+            actionsBar.appendChild(cancelBtn);
+            div.appendChild(actionsBar);
+            
+            return div;
+        }
+
+        function toggleCommentInput(postId) {
+            const inputArea = document.getElementById('commentInput-' + postId);
+            if (inputArea.style.display === 'block') {
+                inputArea.style.display = 'none';
+                delete commentImages['comment-' + postId];
+                document.getElementById('commentImagePreview-' + postId).innerHTML = '';
+            } else {
+                inputArea.style.display = 'block';
+                document.getElementById('commentText-' + postId).focus();
+            }
+        }
+
+        function toggleReplyInput(postId, commentId) {
+            const inputArea = document.getElementById('replyInput-' + postId + '-' + commentId);
+            if (inputArea.style.display === 'block') {
+                inputArea.style.display = 'none';
+                delete commentImages['reply-' + postId + '-' + commentId];
+                document.getElementById('replyImagePreview-' + postId + '-' + commentId).innerHTML = '';
+            } else {
+                inputArea.style.display = 'block';
+                document.getElementById('replyText-' + postId + '-' + commentId).focus();
+            }
+        }
+
+        function previewCommentImage(event, postId) {
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+
+            if (!commentImages['comment-' + postId]) {
+                commentImages['comment-' + postId] = { files: [], urls: [] };
+            }
+
+            commentImages['comment-' + postId].files = [...commentImages['comment-' + postId].files, ...files];
+            renderCommentImagePreview(postId);
+        }
+
+        function renderCommentImagePreview(postId) {
+            const container = document.getElementById('commentImagePreview-' + postId);
+            const data = commentImages['comment-' + postId];
+            
+            if (!data || (data.files.length === 0 && data.urls.length === 0)) {
+                container.innerHTML = '';
                 return;
             }
 
             container.innerHTML = '';
-            posts.forEach(function(post) {
+            
+            data.urls.forEach((url, index) => {
                 const div = document.createElement('div');
-                div.className = 'post-box';
-                div.innerHTML = '<strong>' + escapeHtml(post.author) + '</strong> - ' + formatDate(new Date(post.date).getTime()) + '<br><br>' + escapeHtml(post.content);
+                div.className = 'comment-image-preview-item';
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = '已上传' + (index + 1);
+                
+                const btn = document.createElement('button');
+                btn.className = 'remove-comment-image';
+                btn.textContent = '×';
+                btn.onclick = function() { removeCommentUploadedImage(postId, index); };
+                
+                div.appendChild(img);
+                div.appendChild(btn);
                 container.appendChild(div);
             });
+
+            data.files.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'comment-image-preview-item';
+                
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.alt = '预览' + (index + 1);
+                
+                const btn = document.createElement('button');
+                btn.className = 'remove-comment-image';
+                btn.textContent = '×';
+                btn.onclick = function() { removeCommentFileImage(postId, index); };
+                
+                div.appendChild(img);
+                div.appendChild(btn);
+                container.appendChild(div);
+            });
+        }
+
+        function removeCommentUploadedImage(postId, index) {
+            commentImages['comment-' + postId].urls.splice(index, 1);
+            renderCommentImagePreview(postId);
+        }
+
+        function removeCommentFileImage(postId, index) {
+            commentImages['comment-' + postId].files.splice(index, 1);
+            renderCommentImagePreview(postId);
+        }
+
+        function previewReplyImage(event, postId, commentId) {
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+
+            const key = 'reply-' + postId + '-' + commentId;
+            if (!commentImages[key]) {
+                commentImages[key] = { files: [], urls: [] };
+            }
+
+            commentImages[key].files = [...commentImages[key].files, ...files];
+            renderReplyImagePreview(postId, commentId);
+        }
+
+        function renderReplyImagePreview(postId, commentId) {
+            const container = document.getElementById('replyImagePreview-' + postId + '-' + commentId);
+            const key = 'reply-' + postId + '-' + commentId;
+            const data = commentImages[key];
+            
+            if (!data || (data.files.length === 0 && data.urls.length === 0)) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = '';
+            
+            data.urls.forEach((url, index) => {
+                const div = document.createElement('div');
+                div.className = 'comment-image-preview-item';
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = '已上传' + (index + 1);
+                
+                const btn = document.createElement('button');
+                btn.className = 'remove-comment-image';
+                btn.textContent = '×';
+                btn.onclick = function() { removeReplyUploadedImage(postId, commentId, index); };
+                
+                div.appendChild(img);
+                div.appendChild(btn);
+                container.appendChild(div);
+            });
+
+            data.files.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'comment-image-preview-item';
+                
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.alt = '预览' + (index + 1);
+                
+                const btn = document.createElement('button');
+                btn.className = 'remove-comment-image';
+                btn.textContent = '×';
+                btn.onclick = function() { removeReplyFileImage(postId, commentId, index); };
+                
+                div.appendChild(img);
+                div.appendChild(btn);
+                container.appendChild(div);
+            });
+        }
+
+        function removeReplyUploadedImage(postId, commentId, index) {
+            const key = 'reply-' + postId + '-' + commentId;
+            commentImages[key].urls.splice(index, 1);
+            renderReplyImagePreview(postId, commentId);
+        }
+
+        function removeReplyFileImage(postId, commentId, index) {
+            const key = 'reply-' + postId + '-' + commentId;
+            commentImages[key].files.splice(index, 1);
+            renderReplyImagePreview(postId, commentId);
+        }
+
+        async function addComment(postId) {
+            const content = document.getElementById('commentText-' + postId).value.trim();
+            const data = commentImages['comment-' + postId];
+            
+            if (!content && (!data || (data.files.length === 0 && data.urls.length === 0))) {
+                alert('请输入评论内容或选择图片');
+                return;
+            }
+
+            try {
+                const uploadedUrls = [];
+                if (data && data.files.length > 0) {
+                    if (!apiKey) {
+                        if (confirm('未配置图床，是否前往设置？')) {
+                            showSettings();
+                        }
+                        return;
+                    }
+                    for (const file of data.files) {
+                        const url = await uploadToImgBB(file);
+                        uploadedUrls.push(url);
+                    }
+                }
+
+                const allImages = data ? [...(data.urls || []), ...uploadedUrls] : [];
+
+                const result = await supabaseClient
+                    .from('comments')
+                    .insert([
+                        {
+                            post_id: postId,
+                            author: currentUser,
+                            content: content || null,
+                            images: allImages.length > 0 ? allImages : null,
+                            reply_to: null
+                        }
+                    ]);
+
+                if (result.error) throw result.error;
+
+                delete commentImages['comment-' + postId];
+                await loadPosts();
+            } catch (error) {
+                alert('评论失败：' + error.message);
+            }
+        }
+
+        async function addReply(postId, replyToAuthor, commentId) {
+            const content = document.getElementById('replyText-' + postId + '-' + commentId).value.trim();
+            const key = 'reply-' + postId + '-' + commentId;
+            const data = commentImages[key];
+            
+            if (!content && (!data || (data.files.length === 0 && data.urls.length === 0))) {
+                alert('请输入回复内容或选择图片');
+                return;
+            }
+
+            try {
+                const uploadedUrls = [];
+                if (data && data.files.length > 0) {
+                    if (!apiKey) {
+                        if (confirm('未配置图床，是否前往设置？')) {
+                            showSettings();
+                        }
+                        return;
+                    }
+                    for (const file of data.files) {
+                        const url = await uploadToImgBB(file);
+                        uploadedUrls.push(url);
+                    }
+                }
+
+                const allImages = data ? [...(data.urls || []), ...uploadedUrls] : [];
+
+                const result = await supabaseClient
+                    .from('comments')
+                    .insert([
+                        {
+                            post_id: postId,
+                            author: currentUser,
+                            content: content || null,
+                            images: allImages.length > 0 ? allImages : null,
+                            reply_to: replyToAuthor
+                        }
+                    ]);
+
+                if (result.error) throw result.error;
+
+                delete commentImages[key];
+                await loadPosts();
+            } catch (error) {
+                alert('回复失败：' + error.message);
+            }
+        }
+
+        async function deletePost(postId) {
+            if (!confirm('确定要删除这条动态吗？')) return;
+
+            try {
+                const commentsResult = await supabaseClient
+                    .from('comments')
+                    .delete()
+                    .eq('post_id', postId);
+
+                if (commentsResult.error) throw commentsResult.error;
+
+                const postResult = await supabaseClient
+                    .from('posts')
+                    .delete()
+                    .eq('post_id', postId);
+
+                if (postResult.error) throw postResult.error;
+
+                await loadPosts();
+            } catch (error) {
+                alert('删除失败：' + error.message);
+            }
+        }
+
+        async function deleteComment(commentId) {
+            if (!confirm('确定要删除这条评论吗？')) return;
+
+            try {
+                const result = await supabaseClient
+                    .from('comments')
+                    .delete()
+                    .eq('id', commentId);
+
+                if (result.error) throw result.error;
+
+                await loadPosts();
+            } catch (error) {
+                alert('删除失败：' + error.message);
+            }
+        }
+
+        function viewImage(imageSrc) {
+            document.getElementById('viewerImage').src = imageSrc;
+            document.getElementById('imageViewer').style.display = 'flex';
+        }
+
+        function closeImageViewer() {
+            document.getElementById('imageViewer').style.display = 'none';
         }
 
         function escapeHtml(text) {
@@ -577,6 +1715,8 @@
                 return Math.floor(diff / 60000) + '分钟前';
             } else if (diff < 86400000 && date.getDate() === now.getDate()) {
                 return '今天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+            } else if (diff < 172800000 && date.getDate() === now.getDate() - 1) {
+                return '昨天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
             } else {
                 return date.toLocaleDateString('zh-CN', { 
                     year: 'numeric', 
