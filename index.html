@@ -658,8 +658,8 @@
         <h1>💕 恋爱纪念册 💕</h1>
         <p>记录我们的每一个美好瞬间</p>
         <div class="input-group">
-            <label>用户名</label>
-            <input type="text" id="username" placeholder="请输入用户名">
+            <label>邮箱</label>
+            <input type="email" id="username" placeholder="请输入邮箱（如：love@example.com）">
         </div>
         <div class="input-group">
             <label>密码</label>
@@ -667,46 +667,11 @@
         </div>
         <button class="btn" onclick="login()">登录</button>
         <p style="margin-top: 20px; font-size: 12px; color: #999;">
-            提示：首次使用请直接输入用户名和密码进行注册
+            提示：首次使用请直接输入邮箱和密码进行注册
         </p>
     </div>
 
-    <div class="container settings-page" id="settingsPage">
-        <div class="settings-container">
-            <h2>⚙️ 数据库设置</h2>
-            <div class="info">
-                <p><strong>配置 Supabase 云数据库</strong></p>
-                <p>配置后，所有浏览器、所有设备的数据将自动同步。</p>
-                <br>
-                <p><strong>配置 Cloudinary 图床</strong></p>
-                <p>Cloudinary 是全球领先的图片管理服务，免费提供 25GB 流量和 10GB 存储。</p>
-                <p>图片永久保存，全球 CDN 加速，非常稳定可靠。</p>
-                <br>
-                <p><strong>如何获取配置信息？</strong></p>
-                <p>1. 访问 <a href="https://cloudinary.com" target="_blank">Cloudinary</a> 免费注册</p>
-                <p>2. 在 Dashboard 中找到配置信息（详见配置指南）</p>
-                <p>3. 填写下方配置并保存</p>
-            </div>
-            <div class="input-group">
-                <label>Supabase URL</label>
-                <input type="text" id="supabaseUrl" placeholder="https://xxxxx.supabase.co">
-            </div>
-            <div class="input-group">
-                <label>Supabase Anon Key</label>
-                <input type="text" id="supabaseKey" placeholder="粘贴你的 anon public key">
-            </div>
-            <div class="input-group">
-                <label>Cloudinary Cloud Name（云名称）</label>
-                <input type="text" id="cloudinaryCloudName" placeholder="例如: dxxxxx">
-            </div>
-            <div class="input-group">
-                <label>Cloudinary Upload Preset（上传预设）</label>
-                <input type="text" id="cloudinaryUploadPreset" placeholder="例如: love_diary_preset">
-            </div>
-            <button class="btn" onclick="saveSettings()">保存设置</button>
-            <button class="btn" style="margin-top: 10px; background: #ccc;" onclick="backToMain()">返回</button>
-        </div>
-    </div>
+
 
     <div class="container main-container" id="mainPage">
         <div class="header">
@@ -714,7 +679,6 @@
                 <h1>💕 恋爱纪念册</h1>
                 <div class="user-info">
                     欢迎，<span id="currentUser"></span>
-                    <button class="settings-btn" onclick="showSettings()">设置</button>
                     <button class="logout-btn" onclick="logout()">退出</button>
                 </div>
             </div>
@@ -754,11 +718,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
     <script>
+        // ============================================
+        // 🔧 配置区 - 只需修改这 4 个值
+        // ============================================
+        const APP_CONFIG = {
+            supabase: {
+                url: 'https://jencvwhpffrikvfewcuh.supabase.co',  // 👈 粘贴你的
+                key: 'sb_publishable_G2ZuGMXTUk_VlnZT3tzneA_AUNdt5yp'  // 👈 粘贴你的
+            },
+            cloudinary: {
+                cloudName: 'dklnmkp8u',  // 👈 粘贴你的
+                uploadPreset: 'love_diary_preset'  // 👈 粘贴你的
+            }
+        };
+        // 使用配置初始化
         let supabaseClient = null;
-        let supabaseUrl = localStorage.getItem('supabaseUrl') || '';
-        let supabaseKey = localStorage.getItem('supabaseKey') || '';
-        let cloudinaryCloudName = localStorage.getItem('cloudinaryCloudName') || '';
-        let cloudinaryUploadPreset = localStorage.getItem('cloudinaryUploadPreset') || '';
+        let cloudinaryCloudName = APP_CONFIG.cloudinary.cloudName;
+        let cloudinaryUploadPreset = APP_CONFIG.cloudinary.uploadPreset;
         let users = JSON.parse(localStorage.getItem('loveDiaryUsers')) || {};
         let currentUser = localStorage.getItem('loveDiaryCurrentUser');
         let selectedFiles = [];
@@ -766,135 +742,116 @@
         let commentImages = {};
 
         function initSupabase() {
-            if (supabaseUrl && supabaseKey) {
-                try {
-                    supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-                    return true;
-                } catch (error) {
-                    console.error('Supabase 初始化失败:', error);
-                    return false;
-                }
+            try {
+                supabaseClient = supabase.createClient(
+                    APP_CONFIG.supabase.url,
+                    APP_CONFIG.supabase.key
+                );
+                return true;
+            } catch (error) {
+                console.error('Supabase 初始化失败:', error);
+                alert('配置错误，请联系管理员');
+                return false;
             }
-            return false;
         }
 
-        initSupabase();
-        if (currentUser) {
-            if (!supabaseUrl || !supabaseKey) {
-                alert('请先配置 Supabase 数据库！');
-                showSettings();
-            } else {
+        // 初始化并检查登录状态
+        async function init() {
+            initSupabase();
+            
+            // 检查是否已登录
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            
+            if (session) {
+                // 已登录，直接进入主页
+                currentUser = session.user.user_metadata?.nickname || 
+                            session.user.email.split('@')[0];
+                localStorage.setItem('loveDiaryCurrentUser', currentUser);
                 showMainPage();
+            } else {
+                // 未登录，显示登录页
+                document.getElementById('loginPage').style.display = 'block';
             }
         }
 
-        function login() {
-            const username = document.getElementById('username').value.trim();
+        // 执行初始化
+        init();
+
+
+
+        // 修改 login 函数，登录失败时自动注册
+        async function login() {
+            const email = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
 
-            if (!username || !password) {
-                alert('请输入用户名和密码');
+            if (!email || !password) {
+                alert('请输入邮箱和密码');
                 return;
             }
 
-            if (users[username]) {
-                if (users[username] === password) {
-                    currentUser = username;
-                    localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                    
-                    if (!supabaseUrl || !supabaseKey) {
-                        alert('请先配置 Supabase 数据库！');
-                        showSettings();
-                    } else {
-                        showMainPage();
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) {
+                    // 如果是用户不存在，自动注册
+                    if (error.message.includes('Invalid login credentials') || 
+                        error.message.includes('User not found')) {
+                        if (confirm('账号不存在，是否注册新账号？')) {
+                            await autoRegister(email, password);
+                        }
+                        return;
                     }
-                } else {
-                    alert('密码错误');
+                    throw error;
                 }
-            } else {
-                users[username] = password;
-                localStorage.setItem('loveDiaryUsers', JSON.stringify(users));
-                currentUser = username;
+
+                currentUser = data.user.user_metadata?.nickname || email.split('@')[0];
                 localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                alert('注册成功！请配置数据库。');
-                showSettings();
+                showMainPage();
+            } catch (error) {
+                alert('登录失败：' + error.message);
+                console.error(error);
             }
         }
 
-        function logout() {
+        // 自动注册功能
+        async function autoRegister(email, password) {
+            try {
+                const { data, error } = await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            nickname: email.split('@')[0]
+                        }
+                    }
+                });
+
+                if (error) throw error;
+
+                // 自动登录
+                currentUser = email.split('@')[0];
+                localStorage.setItem('loveDiaryCurrentUser', currentUser);
+                showMainPage();
+                
+                alert('注册成功！欢迎使用💕');
+            } catch (error) {
+                alert('注册失败：' + error.message);
+            }
+        }
+
+        async function logout() {
             if (confirm('确定要退出登录吗？')) {
+                await supabaseClient.auth.signOut();
                 localStorage.removeItem('loveDiaryCurrentUser');
                 currentUser = null;
                 location.reload();
             }
         }
 
-        function showSettings() {
-            document.getElementById('mainPage').style.display = 'none';
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('settingsPage').style.display = 'block';
-            document.getElementById('supabaseUrl').value = supabaseUrl;
-            document.getElementById('supabaseKey').value = supabaseKey;
-            document.getElementById('cloudinaryCloudName').value = cloudinaryCloudName;
-            document.getElementById('cloudinaryUploadPreset').value = cloudinaryUploadPreset;
-        }
 
-        function saveSettings() {
-            const url = document.getElementById('supabaseUrl').value.trim();
-            const key = document.getElementById('supabaseKey').value.trim();
-            const cloudName = document.getElementById('cloudinaryCloudName').value.trim();
-            const uploadPreset = document.getElementById('cloudinaryUploadPreset').value.trim();
-            
-            if (!url || !key) {
-                alert('请填写 Supabase URL 和 Key');
-                return;
-            }
-            
-            if (!cloudName || !uploadPreset) {
-                alert('请填写 Cloudinary Cloud Name 和 Upload Preset');
-                return;
-            }
-            
-            supabaseUrl = url;
-            supabaseKey = key;
-            cloudinaryCloudName = cloudName;
-            cloudinaryUploadPreset = uploadPreset;
-            
-            localStorage.setItem('supabaseUrl', supabaseUrl);
-            localStorage.setItem('supabaseKey', supabaseKey);
-            localStorage.setItem('cloudinaryCloudName', cloudinaryCloudName);
-            localStorage.setItem('cloudinaryUploadPreset', cloudinaryUploadPreset);
-            
-            if (initSupabase()) {
-                alert('保存成功！');
-                backToMain();
-            } else {
-                alert('Supabase 配置有误，请检查 URL 和 Key 是否正确');
-            }
-        }
-
-        function backToMain() {
-            document.getElementById('settingsPage').style.display = 'none';
-            if (currentUser) {
-                document.getElementById('mainPage').style.display = 'block';
-                loadPosts();
-            } else {
-                document.getElementById('loginPage').style.display = 'block';
-            }
-        }
-
-        function showMainPage() {
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('mainPage').style.display = 'block';
-            document.getElementById('currentUser').textContent = currentUser;
-            
-            const now = new Date();
-            const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-            document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
-            
-            setupImageInput();
-            loadPosts();
-        }
 
         function setupImageInput() {
             document.getElementById('imageInput').addEventListener('change', function(e) {
@@ -1053,6 +1010,7 @@
                     .insert([
                         {
                             post_id: Date.now(),
+                            user_id: (await supabaseClient.auth.getUser()).data.user.id,  // 👈 添加这行
                             author: currentUser,
                             content: content || null,
                             images: allImages.length > 0 ? allImages : null,
@@ -1612,6 +1570,7 @@
                     .insert([
                         {
                             post_id: postId,
+                            user_id: (await supabaseClient.auth.getUser()).data.user.id,
                             author: currentUser,
                             content: content || null,
                             images: allImages.length > 0 ? allImages : null,
@@ -1660,6 +1619,7 @@
                     .insert([
                         {
                             post_id: postId,
+                            user_id: (await supabaseClient.auth.getUser()).data.user.id,
                             author: currentUser,
                             content: content || null,
                             images: allImages.length > 0 ? allImages : null,
