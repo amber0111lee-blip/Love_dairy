@@ -967,11 +967,12 @@
             loadPosts();
         }
 
-        // 发送验证码
+        // 发送验证码（通过 Supabase 发送真实邮件）
         async function sendVerificationCode() {
             const email = document.getElementById('registerEmail').value.trim();
             const nickname = document.getElementById('registerNickname').value.trim();
             const errorEl = document.getElementById('step1Error');
+            const sendBtn = document.querySelector('#step1 .btn');
             errorEl.classList.remove('show');
 
             if (!nickname) {
@@ -985,19 +986,35 @@
                 return;
             }
 
-            const code = Math.floor(100000 + Math.random() * 900000).toString();
-            sessionStorage.setItem('verifyCode', code);
-            sessionStorage.setItem('verifyEmail', email);
-            sessionStorage.setItem('verifyNickname', nickname);
+            sendBtn.disabled = true;
+            sendBtn.textContent = '发送中...';
 
-            document.getElementById('emailHint').textContent = email;
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('step2').style.display = 'block';
-
-            alert('验证码（开发模式直接显示）：' + code);
+            try {
+                const { error } = await supabaseClient.auth.signInWithOtp({
+                    email,
+                    options: { shouldCreateUser: true }
+                });
+                if (error) {
+                    errorEl.textContent = '发送失败：' + error.message;
+                    errorEl.classList.add('show');
+                    sendBtn.disabled = false;
+                    sendBtn.textContent = '发送验证码';
+                    return;
+                }
+                sessionStorage.setItem('verifyEmail', email);
+                sessionStorage.setItem('verifyNickname', nickname);
+                document.getElementById('emailHint').textContent = email;
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+            } catch (error) {
+                errorEl.textContent = '发送失败：' + error.message;
+                errorEl.classList.add('show');
+                sendBtn.disabled = false;
+                sendBtn.textContent = '发送验证码';
+            }
         }
 
-        // 完成注册
+        // 完成注册（通过 Supabase 验证 OTP）
         async function handleRegister() {
             const code = document.getElementById('verificationCode').value.trim();
             const password = document.getElementById('registerPassword').value.trim();
@@ -1005,12 +1022,11 @@
             const errorEl = document.getElementById('step2Error');
             errorEl.classList.remove('show');
 
-            const savedCode = sessionStorage.getItem('verifyCode');
             const email = sessionStorage.getItem('verifyEmail');
             const nickname = sessionStorage.getItem('verifyNickname');
 
-            if (code !== savedCode) {
-                errorEl.textContent = '验证码错误，请重新输入';
+            if (!code) {
+                errorEl.textContent = '请输入验证码';
                 errorEl.classList.add('show');
                 return;
             }
@@ -1026,17 +1042,29 @@
             }
 
             try {
-                const { data, error } = await supabaseClient.auth.signUp({
+                // 第一步：用验证码验证邮箱，获得已认证的 session
+                const { data: verifyData, error: verifyError } = await supabaseClient.auth.verifyOtp({
                     email,
-                    password,
-                    options: { data: { nickname } }
+                    token: code,
+                    type: 'email'
                 });
-                if (error) {
-                    errorEl.textContent = '注册失败：' + error.message;
+                if (verifyError) {
+                    errorEl.textContent = '验证码错误或已过期：' + verifyError.message;
                     errorEl.classList.add('show');
                     return;
                 }
-                sessionStorage.removeItem('verifyCode');
+
+                // 第二步：更新密码和昵称
+                const { error: updateError } = await supabaseClient.auth.updateUser({
+                    password,
+                    data: { nickname }
+                });
+                if (updateError) {
+                    errorEl.textContent = '设置密码失败：' + updateError.message;
+                    errorEl.classList.add('show');
+                    return;
+                }
+
                 sessionStorage.removeItem('verifyEmail');
                 sessionStorage.removeItem('verifyNickname');
                 currentUser = nickname;
