@@ -640,6 +640,86 @@
             opacity: 0.3;
         }
 
+                /* Tab 切换样式 */
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #ffe0f0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: #fff;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+        }
+
+        /* 错误提示样式 */
+        .error-message {
+            color: #ff1493;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* 提示文字 */
+        .hint-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .hint-text span {
+            color: #ff69b4;
+            font-weight: bold;
+        }
+
+        /* 重发按钮 */
+        .resend-btn {
+            padding: 8px 15px;
+            background: #ffb6c1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .resend-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* 次要按钮 */
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: #ccc;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -654,21 +734,69 @@
     </style>
 </head>
 <body>
-    <div class="container login-container" id="loginPage">
+    <div class="container login-container" id="authPage">
         <h1>💕 恋爱纪念册 💕</h1>
         <p>记录我们的每一个美好瞬间</p>
-        <div class="input-group">
-            <label>邮箱</label>
-            <input type="email" id="username" placeholder="请输入邮箱（如：love@example.com）">
+        
+        <!-- Tab 切换 -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" id="loginTab" onclick="switchAuthTab('login')">登录</button>
+            <button class="tab-btn" id="registerTab" onclick="switchAuthTab('register')">注册</button>
         </div>
-        <div class="input-group">
-            <label>密码</label>
-            <input type="password" id="password" placeholder="请输入密码">
+
+        <!-- 登录表单 -->
+        <div id="loginForm">
+            <div class="input-group">
+                <label>邮箱</label>
+                <input type="email" id="loginEmail" placeholder="请输入邮箱">
+            </div>
+            <div class="input-group">
+                <label>密码</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码">
+            </div>
+            <button class="btn" onclick="handleLogin()">登录</button>
+            <p id="loginError" class="error-message"></p>
         </div>
-        <button class="btn" onclick="login()">登录</button>
-        <p style="margin-top: 20px; font-size: 12px; color: #999;">
-            提示：首次使用请直接输入邮箱和密码进行注册
-        </p>
+
+        <!-- 注册表单 - 两步流程 -->
+        <div id="registerForm" style="display: none;">
+            <!-- 第一步：输入邮箱 -->
+            <div id="step1" style="display: block;">
+                <div class="input-group">
+                    <label>昵称</label>
+                    <input type="text" id="registerNickname" placeholder="给自己起个昵称">
+                </div>
+                <div class="input-group">
+                    <label>邮箱</label>
+                    <input type="email" id="registerEmail" placeholder="请输入邮箱">
+                </div>
+                <button class="btn" onclick="sendVerificationCode()">发送验证码</button>
+                <p id="step1Error" class="error-message"></p>
+            </div>
+
+            <!-- 第二步：输入验证码和密码 -->
+            <div id="step2" style="display: none;">
+                <div class="input-group">
+                    <label>验证码</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="verificationCode" placeholder="请输入6位验证码" maxlength="6" style="flex: 1;">
+                        <button class="resend-btn" onclick="resendCode()" id="resendBtn">重新发送</button>
+                    </div>
+                    <p class="hint-text">验证码已发送至 <span id="emailHint"></span></p>
+                </div>
+                <div class="input-group">
+                    <label>密码</label>
+                    <input type="password" id="registerPassword" placeholder="请输入密码（至少6位）">
+                </div>
+                <div class="input-group">
+                    <label>确认密码</label>
+                    <input type="password" id="registerPasswordConfirm" placeholder="请再次输入密码">
+                </div>
+                <button class="btn" onclick="handleRegister()">完成注册</button>
+                <button class="btn-secondary" onclick="backToStep1()">返回修改邮箱</button>
+                <p id="step2Error" class="error-message"></p>
+            </div>
+        </div>
     </div>
 
 
