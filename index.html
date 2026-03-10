@@ -27,44 +27,14 @@
             margin: 0 auto;
         }
 
-        .settings-page {
-            display: none;
-        }
-
-        .settings-container {
-            background: #fff;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
-            margin-top: 50px;
-        }
-
-        .settings-container h2 {
-            color: #ff69b4;
-            margin-bottom: 20px;
-        }
-
-        .settings-container .info {
-            background: #fff9e6;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 2px solid #ffe0f0;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .settings-container .info a {
-            color: #ff69b4;
-            text-decoration: none;
-        }
-
+        /* ===== 登录/注册页 ===== */
         .login-container {
             background: #fff;
             border-radius: 20px;
             padding: 40px 30px;
             box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
-            margin-top: 100px;
+            margin-top: 60px;
+            display: none;
         }
 
         .login-container h1 {
@@ -74,10 +44,10 @@
             font-size: 28px;
         }
 
-        .login-container p {
+        .login-container > p {
             text-align: center;
             color: #999;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .input-group {
@@ -118,18 +88,208 @@
             transition: transform 0.2s;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
+        .btn:hover { transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: #ccc;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #ffe0f0;
         }
 
-        .main-container {
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: #fff;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+        }
+
+        .error-message {
+            color: #ff1493;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
             display: none;
         }
+
+        .error-message.show { display: block; }
+
+        .hint-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .hint-text span { color: #ff69b4; font-weight: bold; }
+
+        .resend-btn {
+            padding: 8px 15px;
+            background: #ffb6c1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .resend-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+        /* ===== 情侣配对页 ===== */
+        .couple-setup-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            margin-top: 60px;
+            display: none;
+            text-align: center;
+        }
+
+        .couple-setup-container h1 {
+            color: #ff69b4;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .couple-setup-container .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .couple-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .couple-option-card {
+            background: #fff9f0;
+            border: 2px solid #ffe0f0;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .couple-option-card:hover {
+            border-color: #ff69b4;
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+        }
+
+        .couple-option-card h3 {
+            color: #ff69b4;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .couple-option-card p {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .couple-panel {
+            display: none;
+            text-align: left;
+        }
+
+        .couple-panel.active { display: block; }
+
+        .invite-code-display {
+            background: linear-gradient(135deg, #fff0f8 0%, #ffe8f5 100%);
+            border: 3px dashed #ffb6c1;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .invite-code-display .code {
+            font-size: 42px;
+            font-weight: bold;
+            color: #ff69b4;
+            letter-spacing: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+
+        .invite-code-display p {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .copy-code-btn {
+            padding: 10px 20px;
+            background: #ffb6c1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .copy-code-btn:hover { background: #ff69b4; }
+
+        .waiting-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #ff69b4;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+
+        .dot-pulse {
+            display: flex;
+            gap: 4px;
+        }
+
+        .dot-pulse span {
+            width: 6px;
+            height: 6px;
+            background: #ff69b4;
+            border-radius: 50%;
+            animation: pulse 1.4s infinite ease-in-out;
+        }
+
+        .dot-pulse span:nth-child(2) { animation-delay: 0.2s; }
+        .dot-pulse span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* ===== 主页 ===== */
+        .main-container { display: none; }
 
         .header {
             background: #fff;
@@ -142,17 +302,11 @@
             align-items: center;
         }
 
-        .header h1 {
-            color: #ff69b4;
-            font-size: 24px;
-        }
+        .header h1 { color: #ff69b4; font-size: 24px; }
 
-        .user-info {
-            color: #666;
-            font-size: 14px;
-        }
+        .user-info { color: #666; font-size: 14px; }
 
-        .logout-btn, .settings-btn {
+        .logout-btn {
             background: #ffb6c1;
             color: white;
             border: none;
@@ -161,6 +315,17 @@
             cursor: pointer;
             margin-left: 10px;
             font-size: 14px;
+        }
+
+        .couple-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
         }
 
         .post-box {
@@ -196,10 +361,7 @@
             background: white;
         }
 
-        .post-box textarea:focus {
-            outline: none;
-            border-color: #ff69b4;
-        }
+        .post-box textarea:focus { outline: none; border-color: #ff69b4; }
 
         .post-actions {
             display: flex;
@@ -225,9 +387,7 @@
             font-size: 14px;
         }
 
-        .file-input-label:hover {
-            background: #ff69b4;
-        }
+        .file-input-label:hover { background: #ff69b4; }
 
         .post-btn {
             padding: 10px 25px;
@@ -247,10 +407,7 @@
             gap: 10px;
         }
 
-        .image-preview-item {
-            position: relative;
-            display: inline-block;
-        }
+        .image-preview-item { position: relative; display: inline-block; }
 
         .image-preview-item img {
             max-width: 150px;
@@ -298,17 +455,9 @@
             transition: width 0.3s;
         }
 
-        .upload-progress-text {
-            text-align: center;
-            font-size: 13px;
-            color: #666;
-        }
+        .upload-progress-text { text-align: center; font-size: 13px; color: #666; }
 
-        .posts-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .posts-container { display: flex; flex-direction: column; gap: 20px; }
 
         .post-item {
             background: #fff9e6;
@@ -337,16 +486,8 @@
             margin-bottom: 15px;
         }
 
-        .post-author {
-            font-weight: bold;
-            color: #ff69b4;
-            font-size: 16px;
-        }
-
-        .post-date {
-            color: #999;
-            font-size: 13px;
-        }
+        .post-author { font-weight: bold; color: #ff69b4; font-size: 16px; }
+        .post-date { color: #999; font-size: 13px; }
 
         .post-content {
             color: #333;
@@ -363,13 +504,8 @@
             margin-bottom: 15px;
         }
 
-        .post-images.single {
-            grid-template-columns: 1fr;
-        }
-
-        .post-images.double {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        .post-images.single { grid-template-columns: 1fr; }
+        .post-images.double { grid-template-columns: repeat(2, 1fr); }
 
         .post-image {
             width: 100%;
@@ -380,14 +516,8 @@
             cursor: pointer;
         }
 
-        .post-images.single .post-image {
-            height: auto;
-            max-height: 400px;
-        }
-
-        .post-images.double .post-image {
-            height: 200px;
-        }
+        .post-images.single .post-image { height: auto; max-height: 400px; }
+        .post-images.double .post-image { height: 200px; }
 
         .post-actions-bar {
             display: flex;
@@ -396,13 +526,7 @@
             border-top: 2px dashed #ffe0f0;
         }
 
-        .action-btn {
-            background: none;
-            border: none;
-            color: #ff69b4;
-            cursor: pointer;
-            font-size: 14px;
-        }
+        .action-btn { background: none; border: none; color: #ff69b4; cursor: pointer; font-size: 14px; }
 
         .delete-post-btn {
             background: #ffb6c1;
@@ -428,50 +552,16 @@
             border: 2px solid #ffe0f0;
         }
 
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
+        .comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .comment-author { color: #ff69b4; font-weight: bold; font-size: 14px; }
+        .comment-date { color: #999; font-size: 12px; }
 
-        .comment-author {
-            color: #ff69b4;
-            font-weight: bold;
-            font-size: 14px;
-        }
+        .comment-content { color: #333; font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
+        .reply-info { color: #666; font-size: 13px; margin-bottom: 5px; }
 
-        .comment-date {
-            color: #999;
-            font-size: 12px;
-        }
-
-        .comment-content {
-            color: #333;
-            font-size: 14px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
-
-        .reply-info {
-            color: #666;
-            font-size: 13px;
-            margin-bottom: 5px;
-        }
-
-        .comment-images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-top: 8px;
-        }
-
-        .comment-images.single {
-            grid-template-columns: 1fr;
-        }
-
-        .comment-images.double {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        .comment-images { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+        .comment-images.single { grid-template-columns: 1fr; }
+        .comment-images.double { grid-template-columns: repeat(2, 1fr); }
 
         .comment-image {
             width: 100%;
@@ -482,29 +572,15 @@
             cursor: pointer;
         }
 
-        .comment-images.single .comment-image {
-            height: auto;
-            max-height: 200px;
-        }
+        .comment-images.single .comment-image { height: auto; max-height: 200px; }
 
-        .comment-actions {
-            margin-top: 8px;
-            display: flex;
-            gap: 10px;
-        }
+        .comment-actions { margin-top: 8px; display: flex; gap: 10px; }
 
         .reply-btn, .delete-comment-btn {
-            background: none;
-            border: none;
-            color: #ff69b4;
-            cursor: pointer;
-            font-size: 13px;
+            background: none; border: none; color: #ff69b4; cursor: pointer; font-size: 13px;
         }
 
-        .comment-input-area {
-            display: none;
-            margin-top: 10px;
-        }
+        .comment-input-area { display: none; margin-top: 10px; }
 
         .comment-input {
             width: 100%;
@@ -517,22 +593,11 @@
             font-family: inherit;
         }
 
-        .comment-input:focus {
-            outline: none;
-            border-color: #ff69b4;
-        }
+        .comment-input:focus { outline: none; border-color: #ff69b4; }
 
-        .comment-image-preview {
-            margin-top: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+        .comment-image-preview { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; }
 
-        .comment-image-preview-item {
-            position: relative;
-            display: inline-block;
-        }
+        .comment-image-preview-item { position: relative; display: inline-block; }
 
         .comment-image-preview-item img {
             max-width: 100px;
@@ -557,12 +622,7 @@
             line-height: 1;
         }
 
-        .comment-actions-bar {
-            margin-top: 8px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+        .comment-actions-bar { margin-top: 8px; display: flex; gap: 8px; align-items: center; }
 
         .comment-image-label {
             padding: 6px 12px;
@@ -596,21 +656,14 @@
         .image-viewer {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.9);
             z-index: 9999;
             justify-content: center;
             align-items: center;
         }
 
-        .image-viewer img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
+        .image-viewer img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
         .image-viewer-close {
             position: absolute;
@@ -627,118 +680,24 @@
             line-height: 1;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
-        }
+        .empty-state { text-align: center; padding: 60px 20px; color: #999; }
 
-        .empty-state svg {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            opacity: 0.3;
-        }
-
-                /* Tab 切换样式 */
-        .tab-buttons {
-            display: flex;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 2px solid #ffe0f0;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            background: #fff;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-            color: white;
-        }
-
-        /* 错误提示样式 */
-        .error-message {
-            color: #ff1493;
-            font-size: 14px;
-            margin-top: 10px;
-            text-align: center;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        /* 提示文字 */
-        .hint-text {
-            font-size: 12px;
-            color: #999;
-            margin-top: 5px;
-        }
-
-        .hint-text span {
-            color: #ff69b4;
-            font-weight: bold;
-        }
-
-        /* 重发按钮 */
-        .resend-btn {
-            padding: 8px 15px;
-            background: #ffb6c1;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            white-space: nowrap;
-        }
-
-        .resend-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* 次要按钮 */
-        .btn-secondary {
-            width: 100%;
-            padding: 14px;
-            background: #ccc;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+        .empty-state svg { width: 80px; height: 80px; margin-bottom: 20px; opacity: 0.3; }
 
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            .post-actions {
-                flex-direction: column;
-            }
-            .date-input {
-                width: 100%;
-            }
+            body { padding: 10px; }
+            .post-actions { flex-direction: column; }
+            .date-input { width: 100%; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ===== 登录/注册页 ===== -->
     <div class="container login-container" id="authPage">
         <h1>💕 恋爱纪念册 💕</h1>
         <p>记录我们的每一个美好瞬间</p>
-        
-        <!-- Tab 切换 -->
+
         <div class="tab-buttons">
             <button class="tab-btn active" id="loginTab" onclick="switchAuthTab('login')">登录</button>
             <button class="tab-btn" id="registerTab" onclick="switchAuthTab('register')">注册</button>
@@ -758,9 +717,8 @@
             <p id="loginError" class="error-message"></p>
         </div>
 
-        <!-- 注册表单 - 两步流程 -->
+        <!-- 注册表单 -->
         <div id="registerForm" style="display: none;">
-            <!-- 第一步：输入邮箱 -->
             <div id="step1" style="display: block;">
                 <div class="input-group">
                     <label>昵称</label>
@@ -774,7 +732,6 @@
                 <p id="step1Error" class="error-message"></p>
             </div>
 
-            <!-- 第二步：输入验证码和密码 -->
             <div id="step2" style="display: none;">
                 <div class="input-group">
                     <label>验证码</label>
@@ -786,7 +743,7 @@
                 </div>
                 <div class="input-group">
                     <label>密码</label>
-                    <input type="password" id="registerPassword" placeholder="请输入密码（至少8位）">
+                    <input type="password" id="registerPassword" placeholder="请输入密码（至少6位）">
                 </div>
                 <div class="input-group">
                     <label>确认密码</label>
@@ -799,14 +756,62 @@
         </div>
     </div>
 
+    <!-- ===== 情侣配对页 ===== -->
+    <div class="container couple-setup-container" id="coupleSetupPage">
+        <h1>💑 绑定你的另一半</h1>
+        <p class="subtitle">配对后，你们的纪念册将完全私密，仅两人可见</p>
 
+        <!-- 选择面板 -->
+        <div class="couple-options" id="coupleOptions">
+            <div class="couple-option-card" onclick="showPanel('createPanel')">
+                <h3>💌 我来创建邀请码</h3>
+                <p>生成一个专属邀请码，发送给你的 TA，等 TA 来加入你们的小世界</p>
+            </div>
+            <div class="couple-option-card" onclick="showPanel('joinPanel')">
+                <h3>🔗 我有邀请码</h3>
+                <p>输入 TA 发给你的邀请码，加入已创建的纪念册</p>
+            </div>
+        </div>
 
+        <!-- 创建面板 -->
+        <div class="couple-panel" id="createPanel">
+            <div class="invite-code-display">
+                <p>你的专属邀请码</p>
+                <div class="code" id="myInviteCode">------</div>
+                <p>将此码发给你的 TA，TA 输入后即可配对 💕</p>
+                <button class="copy-code-btn" onclick="copyInviteCode()">📋 复制邀请码</button>
+            </div>
+            <div class="waiting-indicator">
+                <span>等待 TA 加入</span>
+                <div class="dot-pulse">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+            <button class="btn-secondary" onclick="showPanel('coupleOptions')">返回</button>
+        </div>
+
+        <!-- 加入面板 -->
+        <div class="couple-panel" id="joinPanel">
+            <div class="input-group" style="margin-top: 10px;">
+                <label>输入邀请码</label>
+                <input type="text" id="joinCodeInput" placeholder="请输入6位邀请码" maxlength="6"
+                    style="text-align:center; font-size:24px; letter-spacing:6px; font-family:monospace;"
+                    oninput="this.value = this.value.toUpperCase()">
+            </div>
+            <button class="btn" onclick="joinCouple()">加入 TA 的纪念册 💕</button>
+            <p id="joinError" class="error-message"></p>
+            <button class="btn-secondary" onclick="showPanel('coupleOptions')">返回</button>
+        </div>
+    </div>
+
+    <!-- ===== 主页 ===== -->
     <div class="container main-container" id="mainPage">
         <div class="header">
             <div>
                 <h1>💕 恋爱纪念册</h1>
                 <div class="user-info">
-                    欢迎，<span id="currentUser"></span>
+                    欢迎，<span id="currentUserDisplay"></span>
+                    <span class="couple-badge" id="partnerBadge"></span>
                     <button class="logout-btn" onclick="logout()">退出</button>
                 </div>
             </div>
@@ -839,6 +844,7 @@
         </div>
     </div>
 
+    <!-- 图片查看器 -->
     <div class="image-viewer" id="imageViewer" onclick="closeImageViewer()">
         <button class="image-viewer-close" onclick="closeImageViewer()">×</button>
         <img id="viewerImage" src="" alt="查看图片">
@@ -847,28 +853,36 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
     <script>
         // ============================================
-        // 🔧 配置区 - 只需修改这 4 个值
+        // 🔧 配置区
         // ============================================
         const APP_CONFIG = {
             supabase: {
-                url: 'https://jencvwhpffrikvfewcuh.supabase.co',  // 👈 粘贴你的
-                key: 'sb_publishable_G2ZuGMXTUk_VlnZT3tzneA_AUNdt5yp'  // 👈 粘贴你的
+                url: 'https://jencvwhpffrikvfewcuh.supabase.co',
+                key: 'sb_publishable_G2ZuGMXTUk_VlnZT3tzneA_AUNdt5yp'
             },
             cloudinary: {
-                cloudName: 'dklnmkp8u',  // 👈 粘贴你的
-                uploadPreset: 'love_diary_preset'  // 👈 粘贴你的
+                cloudName: 'dklnmkp8u',
+                uploadPreset: 'love_diary_preset'
             }
         };
-        // 使用配置初始化
+
+        // ============================================
+        // 全局状态
+        // ============================================
         let supabaseClient = null;
         let cloudinaryCloudName = APP_CONFIG.cloudinary.cloudName;
         let cloudinaryUploadPreset = APP_CONFIG.cloudinary.uploadPreset;
-        let users = JSON.parse(localStorage.getItem('loveDiaryUsers')) || {};
-        let currentUser = localStorage.getItem('loveDiaryCurrentUser');
+        let currentUser = null;       // 当前用户昵称
+        let currentUserId = null;     // 当前用户 Supabase UUID
+        let currentCoupleId = null;   // 当前情侣组 ID（invite_code）
         let selectedFiles = [];
         let selectedImageUrls = [];
         let commentImages = {};
+        let waitingPollTimer = null;  // 轮询等待配对的定时器
 
+        // ============================================
+        // 初始化
+        // ============================================
         function initSupabase() {
             try {
                 supabaseClient = supabase.createClient(
@@ -876,55 +890,76 @@
                     APP_CONFIG.supabase.key
                 );
                 return true;
-            } catch (error) {
-                console.error('Supabase 初始化失败:', error);
-                alert('配置错误，请联系管理员');
+            } catch (e) {
+                console.error('Supabase 初始化失败:', e);
                 return false;
             }
         }
 
-        // 初始化并检查登录状态
         async function init() {
             initSupabase();
-            
-            // 检查是否已登录
             const { data: { session } } = await supabaseClient.auth.getSession();
-            
+
             if (session) {
-                // 已登录，直接进入主页
-                currentUser = session.user.user_metadata?.nickname || 
-                            session.user.email.split('@')[0];
-                localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                showMainPage();
+                currentUserId = session.user.id;
+                currentUser = session.user.user_metadata?.nickname || session.user.email.split('@')[0];
+                await checkCoupleStatus();
             } else {
-                // 未登录，显示登录页
-                document.getElementById('authPage').style.display = 'block';
+                showPage('authPage');
             }
         }
 
-        // 执行初始化
         init();
 
-        // Tab 切换
-        function switchAuthTab(tab) {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            const loginTab = document.getElementById('loginTab');
-            const registerTab = document.getElementById('registerTab');
-            if (tab === 'login') {
-                loginForm.style.display = 'block';
-                registerForm.style.display = 'none';
-                loginTab.classList.add('active');
-                registerTab.classList.remove('active');
-            } else {
-                loginForm.style.display = 'none';
-                registerForm.style.display = 'block';
-                loginTab.classList.remove('active');
-                registerTab.classList.add('active');
+        // ============================================
+        // 情侣状态检查
+        // ============================================
+        async function checkCoupleStatus() {
+            // 先从 user_metadata 取缓存
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            const cachedCoupleId = user.user_metadata?.couple_id;
+
+            if (cachedCoupleId) {
+                // 再验证数据库中该配对是否真实存在且已完成双向绑定
+                const { data } = await supabaseClient
+                    .from('couples')
+                    .select('invite_code, user1_id, user2_id')
+                    .eq('invite_code', cachedCoupleId)
+                    .single();
+
+                if (data && data.user1_id && data.user2_id) {
+                    currentCoupleId = cachedCoupleId;
+                    await showMainPage();
+                    return;
+                }
             }
+
+            // 没有有效配对，进入配对页
+            showPage('coupleSetupPage');
         }
 
-        // 登录按钮处理
+        // ============================================
+        // 页面切换工具
+        // ============================================
+        function showPage(pageId) {
+            ['authPage', 'coupleSetupPage', 'mainPage'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+            const target = document.getElementById(pageId);
+            if (target) target.style.display = 'block';
+        }
+
+        // ============================================
+        // 登录 / 注册
+        // ============================================
+        function switchAuthTab(tab) {
+            document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+            document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+            document.getElementById('registerTab').classList.toggle('active', tab === 'register');
+        }
+
         async function handleLogin() {
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value.trim();
@@ -937,6 +972,10 @@
                 return;
             }
 
+            const loginBtn = document.querySelector('#loginForm .btn');
+            loginBtn.disabled = true;
+            loginBtn.textContent = '登录中...';
+
             try {
                 const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
                 if (error) {
@@ -944,30 +983,18 @@
                     errorEl.classList.add('show');
                     return;
                 }
+                currentUserId = data.user.id;
                 currentUser = data.user.user_metadata?.nickname || email.split('@')[0];
-                localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                showMainPage();
-            } catch (error) {
-                errorEl.textContent = '登录失败：' + error.message;
+                await checkCoupleStatus();
+            } catch (e) {
+                errorEl.textContent = '登录失败：' + e.message;
                 errorEl.classList.add('show');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = '登录';
             }
         }
 
-        // 显示主页
-        function showMainPage() {
-            document.getElementById('authPage').style.display = 'none';
-            document.getElementById('mainPage').style.display = 'block';
-            document.getElementById('currentUser').textContent = currentUser;
-
-            const now = new Date();
-            const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-            document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
-
-            setupImageInput();
-            loadPosts();
-        }
-
-        // 发送验证码（通过 Supabase 发送真实邮件）
         async function sendVerificationCode() {
             const email = document.getElementById('registerEmail').value.trim();
             const nickname = document.getElementById('registerNickname').value.trim();
@@ -975,16 +1002,8 @@
             const sendBtn = document.querySelector('#step1 .btn');
             errorEl.classList.remove('show');
 
-            if (!nickname) {
-                errorEl.textContent = '请输入昵称';
-                errorEl.classList.add('show');
-                return;
-            }
-            if (!email) {
-                errorEl.textContent = '请输入邮箱';
-                errorEl.classList.add('show');
-                return;
-            }
+            if (!nickname) { errorEl.textContent = '请输入昵称'; errorEl.classList.add('show'); return; }
+            if (!email) { errorEl.textContent = '请输入邮箱'; errorEl.classList.add('show'); return; }
 
             sendBtn.disabled = true;
             sendBtn.textContent = '发送中...';
@@ -997,8 +1016,6 @@
                 if (error) {
                     errorEl.textContent = '发送失败：' + error.message;
                     errorEl.classList.add('show');
-                    sendBtn.disabled = false;
-                    sendBtn.textContent = '发送验证码';
                     return;
                 }
                 sessionStorage.setItem('verifyEmail', email);
@@ -1006,15 +1023,15 @@
                 document.getElementById('emailHint').textContent = email;
                 document.getElementById('step1').style.display = 'none';
                 document.getElementById('step2').style.display = 'block';
-            } catch (error) {
-                errorEl.textContent = '发送失败：' + error.message;
+            } catch (e) {
+                errorEl.textContent = '发送失败：' + e.message;
                 errorEl.classList.add('show');
+            } finally {
                 sendBtn.disabled = false;
                 sendBtn.textContent = '发送验证码';
             }
         }
 
-        // 完成注册（通过 Supabase 验证 OTP）
         async function handleRegister() {
             const code = document.getElementById('verificationCode').value.trim();
             const password = document.getElementById('registerPassword').value.trim();
@@ -1025,36 +1042,24 @@
             const email = sessionStorage.getItem('verifyEmail');
             const nickname = sessionStorage.getItem('verifyNickname');
 
-            if (!code) {
-                errorEl.textContent = '请输入验证码';
-                errorEl.classList.add('show');
-                return;
-            }
-            if (password.length < 6) {
-                errorEl.textContent = '密码至少需要6位';
-                errorEl.classList.add('show');
-                return;
-            }
-            if (password !== passwordConfirm) {
-                errorEl.textContent = '两次输入的密码不一致';
-                errorEl.classList.add('show');
-                return;
-            }
+            if (!code) { errorEl.textContent = '请输入验证码'; errorEl.classList.add('show'); return; }
+            if (password.length < 6) { errorEl.textContent = '密码至少需要6位'; errorEl.classList.add('show'); return; }
+            if (password !== passwordConfirm) { errorEl.textContent = '两次输入的密码不一致'; errorEl.classList.add('show'); return; }
+
+            const regBtn = document.querySelector('#step2 .btn');
+            regBtn.disabled = true;
+            regBtn.textContent = '注册中...';
 
             try {
-                // 第一步：用验证码验证邮箱，获得已认证的 session
                 const { data: verifyData, error: verifyError } = await supabaseClient.auth.verifyOtp({
-                    email,
-                    token: code,
-                    type: 'email'
+                    email, token: code, type: 'email'
                 });
                 if (verifyError) {
-                    errorEl.textContent = '验证码错误或已过期：' + verifyError.message;
+                    errorEl.textContent = '验证码错误或已过期';
                     errorEl.classList.add('show');
                     return;
                 }
 
-                // 第二步：更新密码和昵称
                 const { error: updateError } = await supabaseClient.auth.updateUser({
                     password,
                     data: { nickname }
@@ -1067,218 +1072,327 @@
 
                 sessionStorage.removeItem('verifyEmail');
                 sessionStorage.removeItem('verifyNickname');
+                currentUserId = verifyData.user.id;
                 currentUser = nickname;
-                localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                alert('注册成功！欢迎使用💕');
-                showMainPage();
-            } catch (error) {
-                errorEl.textContent = '注册失败：' + error.message;
+                alert('注册成功！欢迎使用💕\n\n接下来请绑定你的另一半~');
+                await checkCoupleStatus();
+            } catch (e) {
+                errorEl.textContent = '注册失败：' + e.message;
                 errorEl.classList.add('show');
+            } finally {
+                regBtn.disabled = false;
+                regBtn.textContent = '完成注册';
             }
         }
 
-        // 返回第一步
         function backToStep1() {
             document.getElementById('step1').style.display = 'block';
             document.getElementById('step2').style.display = 'none';
         }
 
-        // 重新发送验证码
-        function resendCode() {
-            sendVerificationCode();
+        function resendCode() { sendVerificationCode(); }
+
+        async function logout() {
+            if (!confirm('确定要退出登录吗？')) return;
+            stopWaitingPoll();
+            await supabaseClient.auth.signOut();
+            currentUser = null;
+            currentUserId = null;
+            currentCoupleId = null;
+            location.reload();
         }
 
-        // 修改 login 函数，登录失败时自动注册
-        async function login() {
-            const email = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
+        // ============================================
+        // 情侣配对系统
+        // ============================================
 
-            if (!email || !password) {
-                alert('请输入邮箱和密码');
+        // 显示配对子面板
+        function showPanel(panelId) {
+            stopWaitingPoll();
+            document.getElementById('coupleOptions').style.display = 'none';
+            document.getElementById('createPanel').classList.remove('active');
+            document.getElementById('joinPanel').classList.remove('active');
+
+            if (panelId === 'coupleOptions') {
+                document.getElementById('coupleOptions').style.display = 'flex';
+            } else {
+                document.getElementById(panelId).classList.add('active');
+                if (panelId === 'createPanel') initCreateCouple();
+            }
+        }
+
+        // 生成随机6位大写邀请码
+        function generateCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+            return code;
+        }
+
+        // 创建配对
+        async function initCreateCouple() {
+            const code = generateCode();
+            document.getElementById('myInviteCode').textContent = code;
+
+            // 先删除该用户之前未完成的记录
+            await supabaseClient
+                .from('couples')
+                .delete()
+                .eq('user1_id', currentUserId)
+                .is('user2_id', null);
+
+            // 插入新记录
+            const { error } = await supabaseClient
+                .from('couples')
+                .insert([{ invite_code: code, user1_id: currentUserId }]);
+
+            if (error) {
+                alert('创建邀请码失败：' + error.message);
                 return;
             }
 
-            try {
-                const { data, error } = await supabaseClient.auth.signInWithPassword({
-                    email: email,
-                    password: password
-                });
+            // 开始轮询等待对方加入
+            startWaitingPoll(code);
+        }
 
-                if (error) {
-                    // 如果是用户不存在，自动注册
-                    if (error.message.includes('Invalid login credentials') || 
-                        error.message.includes('User not found')) {
-                        if (confirm('账号不存在，是否注册新账号？')) {
-                            await autoRegister(email, password);
-                        }
-                        return;
-                    }
-                    throw error;
+        // 轮询等待对方扫码加入
+        function startWaitingPoll(inviteCode) {
+            stopWaitingPoll();
+            waitingPollTimer = setInterval(async () => {
+                const { data } = await supabaseClient
+                    .from('couples')
+                    .select('user2_id')
+                    .eq('invite_code', inviteCode)
+                    .single();
+
+                if (data && data.user2_id) {
+                    stopWaitingPoll();
+                    // 对方已加入，保存 couple_id 到自己的 metadata
+                    await supabaseClient.auth.updateUser({
+                        data: { couple_id: inviteCode }
+                    });
+                    currentCoupleId = inviteCode;
+                    alert('配对成功！你们的专属纪念册已建立 💕');
+                    await showMainPage();
+                }
+            }, 3000);
+        }
+
+        function stopWaitingPoll() {
+            if (waitingPollTimer) {
+                clearInterval(waitingPollTimer);
+                waitingPollTimer = null;
+            }
+        }
+
+        // 加入配对
+        async function joinCouple() {
+            const code = document.getElementById('joinCodeInput').value.trim().toUpperCase();
+            const errorEl = document.getElementById('joinError');
+            errorEl.classList.remove('show');
+
+            if (code.length !== 6) {
+                errorEl.textContent = '请输入6位邀请码';
+                errorEl.classList.add('show');
+                return;
+            }
+
+            const joinBtn = document.querySelector('#joinPanel .btn');
+            joinBtn.disabled = true;
+            joinBtn.textContent = '配对中...';
+
+            try {
+                // 查找邀请码
+                const { data, error } = await supabaseClient
+                    .from('couples')
+                    .select('*')
+                    .eq('invite_code', code)
+                    .single();
+
+                if (error || !data) {
+                    errorEl.textContent = '邀请码不存在，请确认后重试';
+                    errorEl.classList.add('show');
+                    return;
                 }
 
-                currentUser = data.user.user_metadata?.nickname || email.split('@')[0];
-                localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                showMainPage();
-            } catch (error) {
-                alert('登录失败：' + error.message);
-                console.error(error);
-            }
-        }
+                if (data.user2_id) {
+                    errorEl.textContent = '该邀请码已被使用';
+                    errorEl.classList.add('show');
+                    return;
+                }
 
-        // 自动注册功能
-        async function autoRegister(email, password) {
-            try {
-                const { data, error } = await supabaseClient.auth.signUp({
-                    email: email,
-                    password: password,
-                    options: {
-                        data: {
-                            nickname: email.split('@')[0]
-                        }
-                    }
+                if (data.user1_id === currentUserId) {
+                    errorEl.textContent = '不能使用自己的邀请码';
+                    errorEl.classList.add('show');
+                    return;
+                }
+
+                // 更新 couples 表，填入 user2_id
+                const { error: updateErr } = await supabaseClient
+                    .from('couples')
+                    .update({ user2_id: currentUserId })
+                    .eq('invite_code', code);
+
+                if (updateErr) throw updateErr;
+
+                // 保存 couple_id 到自己的 metadata
+                await supabaseClient.auth.updateUser({
+                    data: { couple_id: code }
                 });
 
-                if (error) throw error;
-
-                // 自动登录
-                currentUser = email.split('@')[0];
-                localStorage.setItem('loveDiaryCurrentUser', currentUser);
-                showMainPage();
-                
-                alert('注册成功！欢迎使用💕');
-            } catch (error) {
-                alert('注册失败：' + error.message);
+                currentCoupleId = code;
+                alert('配对成功！你们的专属纪念册已建立 💕');
+                await showMainPage();
+            } catch (e) {
+                errorEl.textContent = '配对失败：' + e.message;
+                errorEl.classList.add('show');
+            } finally {
+                joinBtn.disabled = false;
+                joinBtn.textContent = '加入 TA 的纪念册 💕';
             }
         }
 
-        async function logout() {
-            if (confirm('确定要退出登录吗？')) {
-                await supabaseClient.auth.signOut();
-                localStorage.removeItem('loveDiaryCurrentUser');
-                currentUser = null;
-                location.reload();
+        function copyInviteCode() {
+            const code = document.getElementById('myInviteCode').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('邀请码已复制：' + code);
+            }).catch(() => {
+                alert('邀请码：' + code + '\n\n请手动复制');
+            });
+        }
+
+        // ============================================
+        // 主页
+        // ============================================
+        async function showMainPage() {
+            stopWaitingPoll();
+            showPage('mainPage');
+            document.getElementById('currentUserDisplay').textContent = currentUser;
+
+            // 显示情侣信息
+            await loadPartnerInfo();
+
+            const now = new Date();
+            const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+            document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
+
+            setupImageInput();
+            loadPosts();
+        }
+
+        // 加载并显示伴侣昵称
+        async function loadPartnerInfo() {
+            if (!currentCoupleId) return;
+            try {
+                const { data } = await supabaseClient
+                    .from('couples')
+                    .select('user1_id, user2_id')
+                    .eq('invite_code', currentCoupleId)
+                    .single();
+
+                if (!data) return;
+                const partnerId = data.user1_id === currentUserId ? data.user2_id : data.user1_id;
+                if (!partnerId) return;
+
+                // 从 profiles 表读取伴侣昵称（如果有）
+                // 这里用 posts 表中最近一条该用户的记录来获取昵称
+                const { data: postData } = await supabaseClient
+                    .from('posts')
+                    .select('author')
+                    .eq('user_id', partnerId)
+                    .limit(1)
+                    .single();
+
+                if (postData) {
+                    document.getElementById('partnerBadge').textContent = '❤️ ' + postData.author;
+                } else {
+                    document.getElementById('partnerBadge').textContent = '❤️ 等待 TA 发帖';
+                }
+            } catch (e) {
+                // 静默失败，不影响主功能
             }
         }
 
-
-
+        // ============================================
+        // 图片处理
+        // ============================================
         function setupImageInput() {
-            document.getElementById('imageInput').addEventListener('change', function(e) {
+            const input = document.getElementById('imageInput');
+            // 避免重复绑定
+            input.onchange = function(e) {
                 const files = Array.from(e.target.files);
                 if (files.length === 0) return;
-                
                 selectedFiles = [...selectedFiles, ...files];
                 renderImagePreview();
-            });
+            };
         }
 
         function renderImagePreview() {
             const container = document.getElementById('imagePreview');
-            if (selectedFiles.length === 0 && selectedImageUrls.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
-
             container.innerHTML = '';
-            
+
             selectedImageUrls.forEach((url, index) => {
                 const div = document.createElement('div');
                 div.className = 'image-preview-item';
-                
                 const img = document.createElement('img');
                 img.src = url;
-                img.alt = '已上传' + (index + 1);
-                
                 const btn = document.createElement('button');
                 btn.className = 'remove-image';
                 btn.textContent = '×';
-                btn.onclick = function() { removeUploadedImage(index); };
-                
-                div.appendChild(img);
-                div.appendChild(btn);
+                btn.onclick = () => { selectedImageUrls.splice(index, 1); renderImagePreview(); };
+                div.appendChild(img); div.appendChild(btn);
                 container.appendChild(div);
             });
 
             selectedFiles.forEach((file, index) => {
                 const div = document.createElement('div');
                 div.className = 'image-preview-item';
-                
                 const img = document.createElement('img');
                 img.src = URL.createObjectURL(file);
-                img.alt = '预览' + (index + 1);
-                
                 const btn = document.createElement('button');
                 btn.className = 'remove-image';
                 btn.textContent = '×';
-                btn.onclick = function() { removeFileImage(index); };
-                
-                div.appendChild(img);
-                div.appendChild(btn);
+                btn.onclick = () => {
+                    selectedFiles.splice(index, 1);
+                    if (selectedFiles.length === 0) document.getElementById('imageInput').value = '';
+                    renderImagePreview();
+                };
+                div.appendChild(img); div.appendChild(btn);
                 container.appendChild(div);
             });
         }
 
-        function removeUploadedImage(index) {
-            selectedImageUrls.splice(index, 1);
-            renderImagePreview();
-        }
+        async function uploadToCloudinary(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', cloudinaryUploadPreset);
+            formData.append('folder', 'love-diary/' + currentCoupleId);
 
-        function removeFileImage(index) {
-            selectedFiles.splice(index, 1);
-            renderImagePreview();
-            
-            if (selectedFiles.length === 0) {
-                document.getElementById('imageInput').value = '';
+            const response = await fetch(
+                'https://api.cloudinary.com/v1_1/' + cloudinaryCloudName + '/image/upload',
+                { method: 'POST', body: formData }
+            );
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error?.message || '上传失败');
             }
-        }
-
-        async function uploadToImgBB(file) {
-            if (!cloudinaryCloudName || !cloudinaryUploadPreset) {
-                throw new Error('请先在设置中配置 Cloudinary');
-            }
-
-            try {
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('upload_preset', cloudinaryUploadPreset);
-                formData.append('folder', 'love-diary/' + currentUser);
-
-                const response = await fetch(
-                    'https://api.cloudinary.com/v1_1/' + cloudinaryCloudName + '/image/upload',
-                    {
-                        method: 'POST',
-                        body: formData
-                    }
-                );
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error('上传失败: ' + (errorData.error?.message || response.statusText));
-                }
-
-                const data = await response.json();
-                return data.secure_url;
-            } catch (error) {
-                console.error('Cloudinary 上传失败:', error);
-                throw error;
-            }
+            const data = await response.json();
+            return data.secure_url;
         }
 
         function showUploadProgress(current, total) {
-            const progress = document.getElementById('uploadProgress');
-            const fill = document.getElementById('uploadProgressFill');
-            const text = document.getElementById('uploadProgressText');
-            
-            progress.style.display = 'block';
-            const percent = Math.round((current / total) * 100);
-            fill.style.width = percent + '%';
-            text.textContent = '正在上传 ' + current + '/' + total + ' 张图片...';
+            document.getElementById('uploadProgress').style.display = 'block';
+            document.getElementById('uploadProgressFill').style.width = Math.round(current / total * 100) + '%';
+            document.getElementById('uploadProgressText').textContent = '正在上传 ' + current + '/' + total + ' 张图片...';
         }
 
         function hideUploadProgress() {
             document.getElementById('uploadProgress').style.display = 'none';
         }
 
+        // ============================================
+        // 帖子操作
+        // ============================================
         async function createPost() {
             const content = document.getElementById('postContent').value.trim();
             const postDate = document.getElementById('postDate').value;
@@ -1287,27 +1401,19 @@
                 alert('请输入内容或选择图片');
                 return;
             }
-
-            if (!supabaseClient) {
-                alert('数据库未配置，请先设置 Supabase');
-                showSettings();
+            if (!currentCoupleId) {
+                alert('请先完成情侣配对');
                 return;
             }
 
+            const postBtn = document.querySelector('.post-btn');
+            postBtn.disabled = true;
+
             try {
                 const uploadedUrls = [];
-                if (selectedFiles.length > 0) {
-                    if (false) {
-                        if (confirm('未配置图床，是否前往设置？')) {
-                            showSettings();
-                        }
-                        return;
-                    }
-                    for (let i = 0; i < selectedFiles.length; i++) {
-                        showUploadProgress(i + 1, selectedFiles.length);
-                        const url = await uploadToImgBB(selectedFiles[i]);
-                        uploadedUrls.push(url);
-                    }
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    showUploadProgress(i + 1, selectedFiles.length);
+                    uploadedUrls.push(await uploadToCloudinary(selectedFiles[i]));
                 }
                 hideUploadProgress();
 
@@ -1316,69 +1422,58 @@
 
                 const result = await supabaseClient
                     .from('posts')
-                    .insert([
-                        {
-                            post_id: Date.now(),
-                            user_id: (await supabaseClient.auth.getUser()).data.user.id,  // 👈 添加这行
-                            author: currentUser,
-                            content: content || null,
-                            images: allImages.length > 0 ? allImages : null,
-                            date: eventDate
-                        }
-                    ])
+                    .insert([{
+                        post_id: Date.now(),
+                        user_id: currentUserId,
+                        couple_id: currentCoupleId,
+                        author: currentUser,
+                        content: content || null,
+                        images: allImages.length > 0 ? allImages : null,
+                        date: eventDate
+                    }])
                     .select();
 
                 if (result.error) throw result.error;
 
                 document.getElementById('postContent').value = '';
-                selectedFiles = [];
-                selectedImageUrls = [];
+                selectedFiles = []; selectedImageUrls = [];
                 renderImagePreview();
                 document.getElementById('imageInput').value = '';
-                
+
                 const now = new Date();
-                const offsetDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-                document.getElementById('postDate').value = offsetDate.toISOString().slice(0, 16);
+                document.getElementById('postDate').value =
+                    new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 
                 await loadPosts();
                 alert('发布成功！');
-            } catch (error) {
+            } catch (e) {
                 hideUploadProgress();
-                alert('发布失败：' + error.message);
-                console.error(error);
+                alert('发布失败：' + e.message);
+            } finally {
+                postBtn.disabled = false;
             }
         }
 
         async function loadPosts() {
-            if (!supabaseClient) {
-                const container = document.getElementById('postsContainer');
-                container.innerHTML = '';
-                const div = document.createElement('div');
-                div.className = 'empty-state';
-                div.innerHTML = '<p style="color: #ff69b4;">请先配置 Supabase 数据库</p>';
-                const btn = document.createElement('button');
-                btn.className = 'btn';
-                btn.textContent = '前往设置';
-                btn.style.marginTop = '20px';
-                btn.style.width = 'auto';
-                btn.style.padding = '10px 30px';
-                btn.onclick = showSettings;
-                div.appendChild(btn);
-                container.appendChild(div);
-                return;
-            }
+            if (!currentCoupleId) return;
+
+            const container = document.getElementById('postsContainer');
 
             try {
+                // 仅读取本情侣组的帖子
                 const postsResult = await supabaseClient
                     .from('posts')
                     .select('*')
+                    .eq('couple_id', currentCoupleId)
                     .order('date', { ascending: false });
 
                 if (postsResult.error) throw postsResult.error;
 
+                // 仅读取本情侣组的评论
                 const commentsResult = await supabaseClient
                     .from('comments')
                     .select('*')
+                    .eq('couple_id', currentCoupleId)
                     .order('date', { ascending: true });
 
                 if (commentsResult.error) throw commentsResult.error;
@@ -1386,25 +1481,18 @@
                 const posts = postsResult.data || [];
                 const comments = commentsResult.data || [];
 
-                const postsWithComments = posts.map(post => {
-                    return {
-                        ...post,
-                        comments: comments.filter(c => c.post_id === post.post_id)
-                    };
-                });
-
-                renderPosts(postsWithComments);
-            } catch (error) {
-                console.error('加载失败:', error);
-                const container = document.getElementById('postsContainer');
-                container.innerHTML = '<div class="empty-state"><p style="color: #ff1493;">加载数据失败：' + escapeHtml(error.message) + '</p></div>';
+                renderPosts(posts.map(post => ({
+                    ...post,
+                    comments: comments.filter(c => c.post_id === post.post_id)
+                })));
+            } catch (e) {
+                container.innerHTML = '<div class="empty-state"><p style="color:#ff1493;">加载失败：' + escapeHtml(e.message) + '</p></div>';
             }
         }
 
         function renderPosts(posts) {
             const container = document.getElementById('postsContainer');
             container.innerHTML = '';
-            
             if (!posts || posts.length === 0) {
                 const div = document.createElement('div');
                 div.className = 'empty-state';
@@ -1412,220 +1500,196 @@
                 container.appendChild(div);
                 return;
             }
-
-            posts.forEach(post => {
-                const postDiv = createPostElement(post);
-                container.appendChild(postDiv);
-            });
+            posts.forEach(post => container.appendChild(createPostElement(post)));
         }
 
         function createPostElement(post) {
             const div = document.createElement('div');
             div.className = 'post-item';
-            
+
             const header = document.createElement('div');
             header.className = 'post-header';
-            
+
             const author = document.createElement('span');
             author.className = 'post-author';
             author.textContent = post.author;
-            
+
             const rightDiv = document.createElement('div');
+            rightDiv.style.display = 'flex';
+            rightDiv.style.alignItems = 'center';
+            rightDiv.style.gap = '8px';
+
             const date = document.createElement('span');
             date.className = 'post-date';
             date.textContent = formatDate(new Date(post.date).getTime());
             rightDiv.appendChild(date);
-            
-            if (post.author === currentUser) {
+
+            // 只允许本人删除（用 user_id 比较，比 author 字符串更安全）
+            if (post.user_id === currentUserId) {
                 const delBtn = document.createElement('button');
                 delBtn.className = 'delete-post-btn';
                 delBtn.textContent = '删除';
-                delBtn.onclick = function() { deletePost(post.post_id); };
+                delBtn.onclick = () => deletePost(post.post_id);
                 rightDiv.appendChild(delBtn);
             }
-            
+
             header.appendChild(author);
             header.appendChild(rightDiv);
             div.appendChild(header);
-            
+
             if (post.content) {
                 const content = document.createElement('div');
                 content.className = 'post-content';
                 content.textContent = post.content;
                 div.appendChild(content);
             }
-            
+
             if (post.images && post.images.length > 0) {
                 const imagesDiv = document.createElement('div');
-                imagesDiv.className = 'post-images';
-                if (post.images.length === 1) imagesDiv.classList.add('single');
-                if (post.images.length === 2) imagesDiv.classList.add('double');
-                
-                post.images.forEach(imgUrl => {
+                imagesDiv.className = 'post-images' +
+                    (post.images.length === 1 ? ' single' : post.images.length === 2 ? ' double' : '');
+                post.images.forEach(url => {
                     const img = document.createElement('img');
-                    img.src = imgUrl;
-                    img.alt = '图片';
-                    img.className = 'post-image';
-                    img.onclick = function() { viewImage(imgUrl); };
+                    img.src = url; img.className = 'post-image';
+                    img.onclick = () => viewImage(url);
                     imagesDiv.appendChild(img);
                 });
-                
                 div.appendChild(imagesDiv);
             }
-            
+
             const actionsBar = document.createElement('div');
             actionsBar.className = 'post-actions-bar';
-            
             const commentBtn = document.createElement('button');
             commentBtn.className = 'action-btn';
             commentBtn.textContent = '💬 评论 (' + post.comments.length + ')';
-            commentBtn.onclick = function() { toggleCommentInput(post.post_id); };
+            commentBtn.onclick = () => toggleCommentInput(post.post_id);
             actionsBar.appendChild(commentBtn);
-            
             div.appendChild(actionsBar);
-            
-            const commentInputDiv = createCommentInputArea(post.post_id);
-            div.appendChild(commentInputDiv);
-            
+            div.appendChild(createCommentInputArea(post.post_id));
+
             if (post.comments && post.comments.length > 0) {
-                const commentsSection = document.createElement('div');
-                commentsSection.className = 'comments-section';
-                
-                post.comments.forEach(comment => {
-                    const commentDiv = createCommentElement(comment, post.post_id);
-                    commentsSection.appendChild(commentDiv);
-                });
-                
-                div.appendChild(commentsSection);
+                const sec = document.createElement('div');
+                sec.className = 'comments-section';
+                post.comments.forEach(c => sec.appendChild(createCommentElement(c, post.post_id)));
+                div.appendChild(sec);
             }
-            
+
             return div;
         }
 
+        // ============================================
+        // 评论
+        // ============================================
         function createCommentInputArea(postId) {
             const div = document.createElement('div');
             div.id = 'commentInput-' + postId;
             div.className = 'comment-input-area';
-            
+
             const textarea = document.createElement('textarea');
             textarea.className = 'comment-input';
             textarea.id = 'commentText-' + postId;
             textarea.placeholder = '写下你的评论...';
             div.appendChild(textarea);
-            
+
             const previewDiv = document.createElement('div');
             previewDiv.id = 'commentImagePreview-' + postId;
             previewDiv.className = 'comment-image-preview';
             div.appendChild(previewDiv);
-            
-            const actionsBar = document.createElement('div');
-            actionsBar.className = 'comment-actions-bar';
-            
+
+            const bar = document.createElement('div');
+            bar.className = 'comment-actions-bar';
+
             const label = document.createElement('label');
             label.htmlFor = 'commentImageInput-' + postId;
             label.className = 'comment-image-label';
             label.textContent = '📷';
-            
+
             const input = document.createElement('input');
-            input.type = 'file';
-            input.id = 'commentImageInput-' + postId;
-            input.accept = 'image/*';
-            input.multiple = true;
-            input.style.display = 'none';
-            input.onchange = function(e) { previewCommentImage(e, postId); };
-            
-            const submitBtn = document.createElement('button');
-            submitBtn.className = 'comment-submit-btn';
-            submitBtn.textContent = '发送';
-            submitBtn.onclick = function() { addComment(postId); };
-            
+            input.type = 'file'; input.id = 'commentImageInput-' + postId;
+            input.accept = 'image/*'; input.multiple = true; input.style.display = 'none';
+            input.onchange = e => previewCommentImage(e, postId);
+
+            const sendBtn = document.createElement('button');
+            sendBtn.className = 'comment-submit-btn';
+            sendBtn.textContent = '发送';
+            sendBtn.onclick = () => addComment(postId);
+
             const cancelBtn = document.createElement('button');
             cancelBtn.className = 'cancel-comment-btn';
             cancelBtn.textContent = '取消';
-            cancelBtn.onclick = function() { toggleCommentInput(postId); };
-            
-            actionsBar.appendChild(label);
-            actionsBar.appendChild(input);
-            actionsBar.appendChild(submitBtn);
-            actionsBar.appendChild(cancelBtn);
-            div.appendChild(actionsBar);
-            
+            cancelBtn.onclick = () => toggleCommentInput(postId);
+
+            bar.appendChild(label); bar.appendChild(input);
+            bar.appendChild(sendBtn); bar.appendChild(cancelBtn);
+            div.appendChild(bar);
             return div;
         }
 
         function createCommentElement(comment, postId) {
             const div = document.createElement('div');
             div.className = 'comment-item';
-            
+
             const header = document.createElement('div');
             header.className = 'comment-header';
-            
+
             const author = document.createElement('span');
             author.className = 'comment-author';
             author.textContent = comment.author;
-            
+
             const date = document.createElement('span');
             date.className = 'comment-date';
             date.textContent = formatDate(new Date(comment.date).getTime());
-            
-            header.appendChild(author);
-            header.appendChild(date);
+
+            header.appendChild(author); header.appendChild(date);
             div.appendChild(header);
-            
+
             if (comment.reply_to) {
-                const replyInfo = document.createElement('div');
-                replyInfo.className = 'reply-info';
-                replyInfo.textContent = '回复 @' + comment.reply_to;
-                div.appendChild(replyInfo);
+                const ri = document.createElement('div');
+                ri.className = 'reply-info';
+                ri.textContent = '回复 @' + comment.reply_to;
+                div.appendChild(ri);
             }
-            
+
             if (comment.content) {
-                const content = document.createElement('div');
-                content.className = 'comment-content';
-                content.textContent = comment.content;
-                div.appendChild(content);
+                const c = document.createElement('div');
+                c.className = 'comment-content';
+                c.textContent = comment.content;
+                div.appendChild(c);
             }
-            
+
             if (comment.images && comment.images.length > 0) {
-                const imagesDiv = document.createElement('div');
-                imagesDiv.className = 'comment-images';
-                if (comment.images.length === 1) imagesDiv.classList.add('single');
-                if (comment.images.length === 2) imagesDiv.classList.add('double');
-                
-                comment.images.forEach(imgUrl => {
+                const imgs = document.createElement('div');
+                imgs.className = 'comment-images' +
+                    (comment.images.length === 1 ? ' single' : comment.images.length === 2 ? ' double' : '');
+                comment.images.forEach(url => {
                     const img = document.createElement('img');
-                    img.src = imgUrl;
-                    img.alt = '图片';
-                    img.className = 'comment-image';
-                    img.onclick = function() { viewImage(imgUrl); };
-                    imagesDiv.appendChild(img);
+                    img.src = url; img.className = 'comment-image';
+                    img.onclick = () => viewImage(url);
+                    imgs.appendChild(img);
                 });
-                
-                div.appendChild(imagesDiv);
+                div.appendChild(imgs);
             }
-            
+
             const actions = document.createElement('div');
             actions.className = 'comment-actions';
-            
+
             const replyBtn = document.createElement('button');
             replyBtn.className = 'reply-btn';
             replyBtn.textContent = '回复';
-            replyBtn.onclick = function() { toggleReplyInput(postId, comment.id, comment.author); };
+            replyBtn.onclick = () => toggleReplyInput(postId, comment.id, comment.author);
             actions.appendChild(replyBtn);
-            
-            if (comment.author === currentUser) {
+
+            // 只允许本人删除（用 user_id）
+            if (comment.user_id === currentUserId) {
                 const delBtn = document.createElement('button');
                 delBtn.className = 'delete-comment-btn';
                 delBtn.textContent = '删除';
-                delBtn.onclick = function() { deleteComment(comment.id); };
+                delBtn.onclick = () => deleteComment(comment.id);
                 actions.appendChild(delBtn);
             }
-            
+
             div.appendChild(actions);
-            
-            const replyInputDiv = createReplyInputArea(postId, comment.id, comment.author);
-            div.appendChild(replyInputDiv);
-            
+            div.appendChild(createReplyInputArea(postId, comment.id, comment.author));
             return div;
         }
 
@@ -1633,225 +1697,130 @@
             const div = document.createElement('div');
             div.id = 'replyInput-' + postId + '-' + commentId;
             div.className = 'comment-input-area';
-            
+
             const textarea = document.createElement('textarea');
             textarea.className = 'comment-input';
             textarea.id = 'replyText-' + postId + '-' + commentId;
             textarea.placeholder = '回复 ' + authorName + '...';
             div.appendChild(textarea);
-            
+
             const previewDiv = document.createElement('div');
             previewDiv.id = 'replyImagePreview-' + postId + '-' + commentId;
             previewDiv.className = 'comment-image-preview';
             div.appendChild(previewDiv);
-            
-            const actionsBar = document.createElement('div');
-            actionsBar.className = 'comment-actions-bar';
-            
+
+            const bar = document.createElement('div');
+            bar.className = 'comment-actions-bar';
+
             const label = document.createElement('label');
             label.htmlFor = 'replyImageInput-' + postId + '-' + commentId;
             label.className = 'comment-image-label';
             label.textContent = '📷';
-            
+
             const input = document.createElement('input');
-            input.type = 'file';
-            input.id = 'replyImageInput-' + postId + '-' + commentId;
-            input.accept = 'image/*';
-            input.multiple = true;
-            input.style.display = 'none';
-            input.onchange = function(e) { previewReplyImage(e, postId, commentId); };
-            
-            const submitBtn = document.createElement('button');
-            submitBtn.className = 'comment-submit-btn';
-            submitBtn.textContent = '发送';
-            submitBtn.onclick = function() { addReply(postId, authorName, commentId); };
-            
+            input.type = 'file'; input.id = 'replyImageInput-' + postId + '-' + commentId;
+            input.accept = 'image/*'; input.multiple = true; input.style.display = 'none';
+            input.onchange = e => previewReplyImage(e, postId, commentId);
+
+            const sendBtn = document.createElement('button');
+            sendBtn.className = 'comment-submit-btn';
+            sendBtn.textContent = '发送';
+            sendBtn.onclick = () => addReply(postId, authorName, commentId);
+
             const cancelBtn = document.createElement('button');
             cancelBtn.className = 'cancel-comment-btn';
             cancelBtn.textContent = '取消';
-            cancelBtn.onclick = function() { toggleReplyInput(postId, commentId); };
-            
-            actionsBar.appendChild(label);
-            actionsBar.appendChild(input);
-            actionsBar.appendChild(submitBtn);
-            actionsBar.appendChild(cancelBtn);
-            div.appendChild(actionsBar);
-            
+            cancelBtn.onclick = () => toggleReplyInput(postId, commentId);
+
+            bar.appendChild(label); bar.appendChild(input);
+            bar.appendChild(sendBtn); bar.appendChild(cancelBtn);
+            div.appendChild(bar);
             return div;
         }
 
         function toggleCommentInput(postId) {
-            const inputArea = document.getElementById('commentInput-' + postId);
-            if (inputArea.style.display === 'block') {
-                inputArea.style.display = 'none';
+            const el = document.getElementById('commentInput-' + postId);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
                 delete commentImages['comment-' + postId];
                 document.getElementById('commentImagePreview-' + postId).innerHTML = '';
             } else {
-                inputArea.style.display = 'block';
+                el.style.display = 'block';
                 document.getElementById('commentText-' + postId).focus();
             }
         }
 
         function toggleReplyInput(postId, commentId) {
-            const inputArea = document.getElementById('replyInput-' + postId + '-' + commentId);
-            if (inputArea.style.display === 'block') {
-                inputArea.style.display = 'none';
+            const el = document.getElementById('replyInput-' + postId + '-' + commentId);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
                 delete commentImages['reply-' + postId + '-' + commentId];
                 document.getElementById('replyImagePreview-' + postId + '-' + commentId).innerHTML = '';
             } else {
-                inputArea.style.display = 'block';
+                el.style.display = 'block';
                 document.getElementById('replyText-' + postId + '-' + commentId).focus();
             }
         }
 
+        // 评论图片预览
         function previewCommentImage(event, postId) {
             const files = Array.from(event.target.files);
-            if (files.length === 0) return;
-
-            if (!commentImages['comment-' + postId]) {
-                commentImages['comment-' + postId] = { files: [], urls: [] };
-            }
-
-            commentImages['comment-' + postId].files = [...commentImages['comment-' + postId].files, ...files];
+            if (!commentImages['comment-' + postId]) commentImages['comment-' + postId] = { files: [], urls: [] };
+            commentImages['comment-' + postId].files.push(...files);
             renderCommentImagePreview(postId);
         }
 
         function renderCommentImagePreview(postId) {
             const container = document.getElementById('commentImagePreview-' + postId);
             const data = commentImages['comment-' + postId];
-            
-            if (!data || (data.files.length === 0 && data.urls.length === 0)) {
-                container.innerHTML = '';
-                return;
-            }
-
             container.innerHTML = '';
-            
-            data.urls.forEach((url, index) => {
-                const div = document.createElement('div');
-                div.className = 'comment-image-preview-item';
-                
-                const img = document.createElement('img');
-                img.src = url;
-                img.alt = '已上传' + (index + 1);
-                
-                const btn = document.createElement('button');
-                btn.className = 'remove-comment-image';
-                btn.textContent = '×';
-                btn.onclick = function() { removeCommentUploadedImage(postId, index); };
-                
-                div.appendChild(img);
-                div.appendChild(btn);
-                container.appendChild(div);
+            if (!data) return;
+            data.urls.forEach((url, i) => {
+                container.appendChild(buildPreviewItem(url, () => { data.urls.splice(i, 1); renderCommentImagePreview(postId); }));
             });
-
-            data.files.forEach((file, index) => {
-                const div = document.createElement('div');
-                div.className = 'comment-image-preview-item';
-                
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.alt = '预览' + (index + 1);
-                
-                const btn = document.createElement('button');
-                btn.className = 'remove-comment-image';
-                btn.textContent = '×';
-                btn.onclick = function() { removeCommentFileImage(postId, index); };
-                
-                div.appendChild(img);
-                div.appendChild(btn);
-                container.appendChild(div);
+            data.files.forEach((file, i) => {
+                container.appendChild(buildPreviewItem(URL.createObjectURL(file), () => { data.files.splice(i, 1); renderCommentImagePreview(postId); }));
             });
-        }
-
-        function removeCommentUploadedImage(postId, index) {
-            commentImages['comment-' + postId].urls.splice(index, 1);
-            renderCommentImagePreview(postId);
-        }
-
-        function removeCommentFileImage(postId, index) {
-            commentImages['comment-' + postId].files.splice(index, 1);
-            renderCommentImagePreview(postId);
         }
 
         function previewReplyImage(event, postId, commentId) {
-            const files = Array.from(event.target.files);
-            if (files.length === 0) return;
-
             const key = 'reply-' + postId + '-' + commentId;
-            if (!commentImages[key]) {
-                commentImages[key] = { files: [], urls: [] };
-            }
-
-            commentImages[key].files = [...commentImages[key].files, ...files];
+            const files = Array.from(event.target.files);
+            if (!commentImages[key]) commentImages[key] = { files: [], urls: [] };
+            commentImages[key].files.push(...files);
             renderReplyImagePreview(postId, commentId);
         }
 
         function renderReplyImagePreview(postId, commentId) {
+            const key = 'reply-' + postId + '-' + commentId;
             const container = document.getElementById('replyImagePreview-' + postId + '-' + commentId);
-            const key = 'reply-' + postId + '-' + commentId;
             const data = commentImages[key];
-            
-            if (!data || (data.files.length === 0 && data.urls.length === 0)) {
-                container.innerHTML = '';
-                return;
-            }
-
             container.innerHTML = '';
-            
-            data.urls.forEach((url, index) => {
-                const div = document.createElement('div');
-                div.className = 'comment-image-preview-item';
-                
-                const img = document.createElement('img');
-                img.src = url;
-                img.alt = '已上传' + (index + 1);
-                
-                const btn = document.createElement('button');
-                btn.className = 'remove-comment-image';
-                btn.textContent = '×';
-                btn.onclick = function() { removeReplyUploadedImage(postId, commentId, index); };
-                
-                div.appendChild(img);
-                div.appendChild(btn);
-                container.appendChild(div);
+            if (!data) return;
+            data.urls.forEach((url, i) => {
+                container.appendChild(buildPreviewItem(url, () => { data.urls.splice(i, 1); renderReplyImagePreview(postId, commentId); }));
             });
-
-            data.files.forEach((file, index) => {
-                const div = document.createElement('div');
-                div.className = 'comment-image-preview-item';
-                
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.alt = '预览' + (index + 1);
-                
-                const btn = document.createElement('button');
-                btn.className = 'remove-comment-image';
-                btn.textContent = '×';
-                btn.onclick = function() { removeReplyFileImage(postId, commentId, index); };
-                
-                div.appendChild(img);
-                div.appendChild(btn);
-                container.appendChild(div);
+            data.files.forEach((file, i) => {
+                container.appendChild(buildPreviewItem(URL.createObjectURL(file), () => { data.files.splice(i, 1); renderReplyImagePreview(postId, commentId); }));
             });
         }
 
-        function removeReplyUploadedImage(postId, commentId, index) {
-            const key = 'reply-' + postId + '-' + commentId;
-            commentImages[key].urls.splice(index, 1);
-            renderReplyImagePreview(postId, commentId);
-        }
-
-        function removeReplyFileImage(postId, commentId, index) {
-            const key = 'reply-' + postId + '-' + commentId;
-            commentImages[key].files.splice(index, 1);
-            renderReplyImagePreview(postId, commentId);
+        function buildPreviewItem(src, onRemove) {
+            const div = document.createElement('div');
+            div.className = 'comment-image-preview-item';
+            const img = document.createElement('img');
+            img.src = src;
+            const btn = document.createElement('button');
+            btn.className = 'remove-comment-image';
+            btn.textContent = '×';
+            btn.onclick = onRemove;
+            div.appendChild(img); div.appendChild(btn);
+            return div;
         }
 
         async function addComment(postId) {
             const content = document.getElementById('commentText-' + postId).value.trim();
             const data = commentImages['comment-' + postId];
-            
             if (!content && (!data || (data.files.length === 0 && data.urls.length === 0))) {
                 alert('请输入评论内容或选择图片');
                 return;
@@ -1860,39 +1829,25 @@
             try {
                 const uploadedUrls = [];
                 if (data && data.files.length > 0) {
-                    if (false) {
-                        if (confirm('未配置图床，是否前往设置？')) {
-                            showSettings();
-                        }
-                        return;
-                    }
-                    for (const file of data.files) {
-                        const url = await uploadToImgBB(file);
-                        uploadedUrls.push(url);
-                    }
+                    for (const file of data.files) uploadedUrls.push(await uploadToCloudinary(file));
                 }
-
                 const allImages = data ? [...(data.urls || []), ...uploadedUrls] : [];
 
-                const result = await supabaseClient
-                    .from('comments')
-                    .insert([
-                        {
-                            post_id: postId,
-                            user_id: (await supabaseClient.auth.getUser()).data.user.id,
-                            author: currentUser,
-                            content: content || null,
-                            images: allImages.length > 0 ? allImages : null,
-                            reply_to: null
-                        }
-                    ]);
+                const result = await supabaseClient.from('comments').insert([{
+                    post_id: postId,
+                    user_id: currentUserId,
+                    couple_id: currentCoupleId,
+                    author: currentUser,
+                    content: content || null,
+                    images: allImages.length > 0 ? allImages : null,
+                    reply_to: null
+                }]);
 
                 if (result.error) throw result.error;
-
                 delete commentImages['comment-' + postId];
                 await loadPosts();
-            } catch (error) {
-                alert('评论失败：' + error.message);
+            } catch (e) {
+                alert('评论失败：' + e.message);
             }
         }
 
@@ -1900,7 +1855,6 @@
             const content = document.getElementById('replyText-' + postId + '-' + commentId).value.trim();
             const key = 'reply-' + postId + '-' + commentId;
             const data = commentImages[key];
-            
             if (!content && (!data || (data.files.length === 0 && data.urls.length === 0))) {
                 alert('请输入回复内容或选择图片');
                 return;
@@ -1909,85 +1863,56 @@
             try {
                 const uploadedUrls = [];
                 if (data && data.files.length > 0) {
-                    if (false) {
-                        if (confirm('未配置图床，是否前往设置？')) {
-                            showSettings();
-                        }
-                        return;
-                    }
-                    for (const file of data.files) {
-                        const url = await uploadToImgBB(file);
-                        uploadedUrls.push(url);
-                    }
+                    for (const file of data.files) uploadedUrls.push(await uploadToCloudinary(file));
                 }
-
                 const allImages = data ? [...(data.urls || []), ...uploadedUrls] : [];
 
-                const result = await supabaseClient
-                    .from('comments')
-                    .insert([
-                        {
-                            post_id: postId,
-                            user_id: (await supabaseClient.auth.getUser()).data.user.id,
-                            author: currentUser,
-                            content: content || null,
-                            images: allImages.length > 0 ? allImages : null,
-                            reply_to: replyToAuthor
-                        }
-                    ]);
+                const result = await supabaseClient.from('comments').insert([{
+                    post_id: postId,
+                    user_id: currentUserId,
+                    couple_id: currentCoupleId,
+                    author: currentUser,
+                    content: content || null,
+                    images: allImages.length > 0 ? allImages : null,
+                    reply_to: replyToAuthor
+                }]);
 
                 if (result.error) throw result.error;
-
                 delete commentImages[key];
                 await loadPosts();
-            } catch (error) {
-                alert('回复失败：' + error.message);
+            } catch (e) {
+                alert('回复失败：' + e.message);
             }
         }
 
         async function deletePost(postId) {
             if (!confirm('确定要删除这条动态吗？')) return;
-
             try {
-                const commentsResult = await supabaseClient
-                    .from('comments')
-                    .delete()
-                    .eq('post_id', postId);
-
-                if (commentsResult.error) throw commentsResult.error;
-
-                const postResult = await supabaseClient
-                    .from('posts')
-                    .delete()
-                    .eq('post_id', postId);
-
-                if (postResult.error) throw postResult.error;
-
+                await supabaseClient.from('comments').delete().eq('post_id', postId);
+                const r = await supabaseClient.from('posts').delete().eq('post_id', postId);
+                if (r.error) throw r.error;
                 await loadPosts();
-            } catch (error) {
-                alert('删除失败：' + error.message);
+            } catch (e) {
+                alert('删除失败：' + e.message);
             }
         }
 
         async function deleteComment(commentId) {
             if (!confirm('确定要删除这条评论吗？')) return;
-
             try {
-                const result = await supabaseClient
-                    .from('comments')
-                    .delete()
-                    .eq('id', commentId);
-
-                if (result.error) throw result.error;
-
+                const r = await supabaseClient.from('comments').delete().eq('id', commentId);
+                if (r.error) throw r.error;
                 await loadPosts();
-            } catch (error) {
-                alert('删除失败：' + error.message);
+            } catch (e) {
+                alert('删除失败：' + e.message);
             }
         }
 
-        function viewImage(imageSrc) {
-            document.getElementById('viewerImage').src = imageSrc;
+        // ============================================
+        // 工具函数
+        // ============================================
+        function viewImage(src) {
+            document.getElementById('viewerImage').src = src;
             document.getElementById('imageViewer').style.display = 'flex';
         }
 
@@ -2006,24 +1931,16 @@
             const date = new Date(timestamp);
             const now = new Date();
             const diff = now - date;
-            
-            if (diff < 60000) {
-                return '刚刚';
-            } else if (diff < 3600000) {
-                return Math.floor(diff / 60000) + '分钟前';
-            } else if (diff < 86400000 && date.getDate() === now.getDate()) {
+            if (diff < 60000) return '刚刚';
+            if (diff < 3600000) return Math.floor(diff / 60000) + '分钟前';
+            if (diff < 86400000 && date.getDate() === now.getDate())
                 return '今天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
-            } else if (diff < 172800000 && date.getDate() === now.getDate() - 1) {
+            if (diff < 172800000 && date.getDate() === now.getDate() - 1)
                 return '昨天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
-            } else {
-                return date.toLocaleDateString('zh-CN', { 
-                    year: 'numeric', 
-                    month: '2-digit', 
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }).replace(/\//g, '-');
-            }
+            return date.toLocaleDateString('zh-CN', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+            }).replace(/\//g, '-');
         }
     </script>
 </body>
